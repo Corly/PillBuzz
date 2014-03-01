@@ -52,9 +52,9 @@ public class UserSetFragment extends Fragment{
         save_passwd=(Button)v.findViewById(R.id.save_passwd);
         cancel_passwd=(Button)v.findViewById(R.id.cancel_passwd);
         
-        silentSwitch=(Switch)v.findViewById(R.id.silet_switch);
-        braceletSwitch=(Switch)v.findViewById(R.id.bracelet_switch);
-        passwordSwitch=(Switch)v.findViewById(R.id.passwd_switch);
+        silentSwitch=(Switch)v.findViewById(R.id.togglebutton_silent);
+        braceletSwitch=(Switch)v.findViewById(R.id.togglebutton_bracelet);
+        passwordSwitch=(Switch)v.findViewById(R.id.togglebutton_password);
      
         return v;
 	}
