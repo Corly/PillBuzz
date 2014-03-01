@@ -31,7 +31,9 @@ public class MedSetGeneral extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.fragment_med_general_settings, container, false);
+		View v = inflater.inflate(R.layout.general, container, false);
+		
+		return v;
 	}
 	
 }

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:clickable="true"
+    android:fillViewport="false" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start time"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="#b2394e" />
+
+        <Space
+            android:id="@+id/space28"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_gravity="left|center_vertical" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/starttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX:XX" />
+
+            <Space
+                android:id="@+id/space7"
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <Button
+                android:id="@+id/changetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change " />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space8"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <TextView
+            android:id="@+id/startdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:text="Start date"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="#b2394e" />
+
+        <Space
+            android:id="@+id/space6"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/startdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DD.MM.YY" />
+
+            <Button
+                android:id="@+id/changestartdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/enddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:text="End date"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="#b2394e" />
+
+        <Space
+            android:id="@+id/space7"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/enddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DD.MM.YY" />
+
+            <Button
+                android:id="@+id/changeenddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/finaldate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Final Date" />
+
+            <Space
+                android:id="@+id/space16"
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <Switch
+                android:id="@+id/switch_time_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space5"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_gravity="left|center_vertical" />
+
+        <TextView
+            android:id="@+id/interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interval"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="#b2394e" />
+
+        <Space
+            android:id="@+id/space24"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4" >
+
+            <Button
+                android:id="@+id/button_4h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttblue"
+                android:singleLine="false"
+                android:text="4 h"
+                android:width="1dp" />
+
+            <Space
+                android:id="@+id/space10"
+                android:layout_width="15px"
+                android:layout_height="20px" />
+
+            <Button
+                android:id="@+id/button_6h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttblue"
+                android:text="6 h" />
+
+            <Space
+                android:id="@+id/space11"
+                android:layout_width="15px"
+                android:layout_height="20px" />
+
+            <Button
+                android:id="@+id/button_8h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttblue"
+                android:text="8 h" />
+
+            <Space
+                android:id="@+id/space9"
+                android:layout_width="15px"
+                android:layout_height="20px" />
+
+            <Button
+                android:id="@+id/button_12h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12h" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space14"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <Space
+            android:id="@+id/space13"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/enddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DD.MM.YY" />
+
+            <Space
+                android:id="@+id/space12"
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <Button
+                android:id="@+id/changefinaldate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space15"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20px" >
+
+            <Space
+                android:id="@+id/space35"
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Number of doses"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="#b2394e" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/nrdoses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nr of doses" />
+
+                <Space
+                    android:id="@+id/space33"
+                    android:layout_width="20px"
+                    android:layout_height="20px" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/doze_entries" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/space34"
+            android:layout_width="40px"
+            android:layout_height="40px" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/save"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+            <Space
+                android:id="@+id/space18"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/button16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

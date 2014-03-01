@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="7"
             android:text="Password"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Switch
             android:id="@+id/togglebutton_password"

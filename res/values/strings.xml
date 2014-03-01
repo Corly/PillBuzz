@@ -11,5 +11,12 @@
     <string name="title_activity_med_settings">MedSettings</string>
     <string name="title_activity_alarm">Alarm</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string-array name="doze_entries">
+        <item>pills</item>
+        <item>drops</item>
+        <item>ml</item>
+        <item>mg</item>
+    </string-array>
 
 </resources>
