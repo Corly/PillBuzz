@@ -149,7 +149,7 @@
         android:layout_weight="3"/>
            
         <Button 
-        android:id="@+id/canel_passwd"
+        android:id="@+id/cancel_passwd"
         android:text="cancel"
         android:layout_weight="1"
         android:gravity="right"

@@ -41,7 +41,7 @@ public class MedListActivity extends FragmentActivity implements
 		
 		//setting the dimention of the text
 		Display display=getWindowManager().getDefaultDisplay();
-		text_size=display.getWidth()/40;
+		text_size=display.getHeight()/30;
 		
 
 		if (findViewById(R.id.med_detail_container) != null) {
