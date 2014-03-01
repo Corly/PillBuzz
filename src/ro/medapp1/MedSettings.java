@@ -75,12 +75,21 @@ public class MedSettings extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
+			Fragment fragment=null;
+			switch(position)
+			{
+			case 0:
+			{
+				MedSetGeneral frag=new MedSetGeneral();
+				fragment= (Fragment)frag;
+			}break;
+			case 1: {
+				MedSetTimetable frag=new MedSetTimetable();
+				fragment= (Fragment)frag;
+			}break;
+			}
 			
-			Fragment fragment=new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			
+					
 			return fragment;
 		}
 
