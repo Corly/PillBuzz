@@ -27,7 +27,7 @@
      />
 <Switch 
     android:layout_weight="8"
-    android:id="@+id/togglebutton"
+    android:id="@+id/silet_switch"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="right"
@@ -54,7 +54,7 @@
 
 <Switch 
     android:layout_weight="8"
-    android:id="@+id/togglebutton"
+    android:id="@+id/bracelet_switch"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="right"
@@ -81,7 +81,7 @@
      />
 <Switch 
     android:layout_weight="8"
-    android:id="@+id/togglebutton"
+    android:id="@+id/passwd_switch"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="right"
@@ -89,10 +89,6 @@
     android:textOff="Off"
    />    
 </LinearLayout>
-
-
-
-
 
 <LinearLayout 
     android:id="@+id/passwd_container"

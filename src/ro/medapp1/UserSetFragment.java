@@ -5,13 +5,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 
 public class UserSetFragment extends Fragment{
+	
+	Switch silentSwitch,braceletSwitch,passwordSwitch;
+	Button change_passwd,save_passwd,cancel_passwd;
+	TextView silent,password,bracelet;
 	
 	public UserSetFragment()
 	{
@@ -39,21 +44,32 @@ public class UserSetFragment extends Fragment{
         
         //setting the text size 
         
-        TextView tv=(TextView)v.findViewById(R.id.silent);
-        tv.setTextSize(MedListActivity.text_size);
-        tv=(TextView)v.findViewById(R.id.password);
-        tv.setTextSize(MedListActivity.text_size);
-        tv=(TextView)v.findViewById(R.id.bracelet);
-        tv.setTextSize(MedListActivity.text_size);
+        silent=(TextView)v.findViewById(R.id.silent);        
+        password=(TextView)v.findViewById(R.id.password);      
+        bracelet=(TextView)v.findViewById(R.id.bracelet);     
 
-        Button change_passwd=(Button)v.findViewById(R.id.change_passwd);
-        Button save_passwd=(Button)v.findViewById(R.id.save_passwd);
-        Button cancel_passwd=(Button)v.findViewById(R.id.cancel_passwd);
-        change_passwd.setTextSize(MedListActivity.text_size);
-        save_passwd.setTextSize(MedListActivity.text_size);
-        cancel_passwd.setTextSize(MedListActivity.text_size);
+        change_passwd=(Button)v.findViewById(R.id.change_passwd);
+        save_passwd=(Button)v.findViewById(R.id.save_passwd);
+        cancel_passwd=(Button)v.findViewById(R.id.cancel_passwd);
         
+        silentSwitch=(Switch)v.findViewById(R.id.silet_switch);
+        braceletSwitch=(Switch)v.findViewById(R.id.bracelet_switch);
+        passwordSwitch=(Switch)v.findViewById(R.id.passwd_switch);
+     
         return v;
+	}
+	
+	public void setup()
+	{
+		silent.setTextSize(MedListActivity.text_size);
+		password.setTextSize(MedListActivity.text_size);
+		bracelet.setTextSize(MedListActivity.text_size);
+		change_passwd.setTextSize(MedListActivity.text_size);
+	    save_passwd.setTextSize(MedListActivity.text_size);
+	    cancel_passwd.setTextSize(MedListActivity.text_size);
+	    
+	    
+	    
 	}
 
 		

@@ -38,6 +38,10 @@
             android:name="ro.medapp1.MedSettings"
             android:label="@string/title_activity_med_settings" >
         </activity>
+        <activity
+            android:name="ro.medapp1.Alarm"
+            android:label="@string/title_activity_alarm" >
+        </activity>
     </application>
 
 </manifest>
