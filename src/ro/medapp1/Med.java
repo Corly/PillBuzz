@@ -1,14 +1,12 @@
 package ro.medapp1;
 
-import android.media.Image;
-
 public class Med {
 	private String name;
 	private String administrationMethod;
 	private String description;
 	private String previousDrugs;
 	private String drugInteraction;
-	private Image picture;
+	private String picture;
 	private int dosage;
 	private int firstDoseHour;
 	private int firstDoseMinute;
@@ -55,7 +53,7 @@ public class Med {
 		return name;
 	}
 	
-	public Image getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 	
@@ -115,7 +113,7 @@ public class Med {
 		this.name = name;
 	}
 	
-	public void setPicture(Image picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 	
