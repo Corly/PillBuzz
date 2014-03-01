@@ -19,10 +19,10 @@
         <Button
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+     		android:id="@+id/update_button"
      		android:layout_centerInParent="true"  
      		android:text="UPDATE"
-     		android:textSize="30dp"          
-            />
+     		/>
         
     </RelativeLayout>
     
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
        	android:layout_centerVertical="true"
-        android:textSize="30dp"        
+        android:id="@+id/delay"
         android:text="Delay"/>
         </RelativeLayout>
         
@@ -63,15 +63,15 @@
         <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="30dp"        
+        android:id="@+id/min"
+        android:layout_centerInParent="true"        
         android:text="min"/>
         </RelativeLayout>
     </LinearLayout>
    <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="30dp"
+        android:id="@+id/buffer"
         android:text="Buffer time"
         android:layout_weight="1"/>
     <LinearLayout

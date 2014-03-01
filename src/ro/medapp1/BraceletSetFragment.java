@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 public class BraceletSetFragment extends Fragment {
 
@@ -34,6 +36,15 @@ public class BraceletSetFragment extends Fragment {
   
 		View v=inflater.inflate(R.layout.fragment_bracelet_settings, container, false);
 
+		TextView tv=(TextView)v.findViewById(R.id.delay);
+        tv.setTextSize(MedListActivity.text_size);
+        
+        tv=(TextView)v.findViewById(R.id.buffer);
+        tv.setTextSize(MedListActivity.text_size);
+        
+        Button update_button=(Button)v.findViewById(R.id.update_button);
+        update_button.setTextSize(MedListActivity.text_size);
+		
 		final NumberPicker delay=(NumberPicker)v.findViewById(R.id.delay_number_picker);
 		final NumberPicker bufferNumber=(NumberPicker)v.findViewById(R.id.buffer_number_picker);
 		final NumberPicker bufferUnit=(NumberPicker)v.findViewById(R.id.buffer_unit_number_picker);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 
 
@@ -33,9 +34,15 @@ public class UserSetFragment extends Fragment{
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_settings, container, false);
-    }
+        View v=inflater.inflate(R.layout.fragment_user_settings, container, false);
+        TextView tv=(TextView)v.findViewById(R.id.silent);
+        tv.setTextSize(MedListActivity.text_size);
+        tv=(TextView)v.findViewById(R.id.password);
+        tv.setTextSize(MedListActivity.text_size);
+        tv=(TextView)v.findViewById(R.id.bracelet);
+        tv.setTextSize(MedListActivity.text_size);
+        return v;
+	}
 
 		
 }
