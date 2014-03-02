@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -57,7 +58,7 @@ public class Settings extends FragmentActivity {
 		
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.settings_pager);
-		setPager(1);
+		setPager(0);
 
 
 	}
@@ -84,7 +85,7 @@ public class Settings extends FragmentActivity {
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
-	public class SectionsPagerAdapter1 extends FragmentPagerAdapter {
+	public class SectionsPagerAdapter1 extends FragmentStatePagerAdapter {
 
 		public SectionsPagerAdapter1(FragmentManager fm) {
 			super(fm);
@@ -121,6 +122,17 @@ public class Settings extends FragmentActivity {
 			
 			}
 			return fragment;
+		}
+		@Override
+		public int getItemPosition(Object item)
+		{
+//			if(item instanceof MedSetFragment)
+//			{
+//				((MedSetFragment)item).update();
+//			}
+//			
+			return super.getItemPosition(item);
+			
 		}
 
 		@Override

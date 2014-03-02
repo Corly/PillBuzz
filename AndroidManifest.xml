@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
-
+    
+	<uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -34,6 +35,10 @@
             android:name="ro.medapp1.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+         <activity
+            android:name="ro.medapp1.MedSetActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
         <activity
             android:name="ro.medapp1.MedSettings"
             android:label="@string/title_activity_med_settings" >
@@ -42,6 +47,7 @@
             android:name="ro.medapp1.Alarm"
             android:label="@string/title_activity_alarm" >
         </activity>
+        <receiver android:name="ro.medapp1.Alarm" android:process=":remote" />
     </application>
 
 </manifest>

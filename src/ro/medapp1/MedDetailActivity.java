@@ -1,9 +1,15 @@
 package ro.medapp1;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 /**
@@ -15,11 +21,39 @@ import android.view.MenuItem;
  * a {@link MedDetailFragment}.
  */
 public class MedDetailActivity extends FragmentActivity {
-
+	Vibrator v;
+	MediaPlayer mediaPlayer;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_med_detail);
+		
+		Log.d("Hello","Balloo");
+		Intent intent = getIntent();
+        if (intent != null && intent.getBooleanExtra("fromAlarm", false)) {
+        	Log.d("Hello","Balloo");
+    		v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+    		// Vibrate for 500 milliseconds
+    		long[] ceva = { 500, 1000 };
+    		v.vibrate(ceva, 0);
+    		mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+    		mediaPlayer.start();
+    		
+    		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setTitle("Remainder");
+    		builder.setMessage("You have to take some pills");
+    		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+    			
+    			@Override
+    			public void onClick(DialogInterface dialog, int which) {
+    				v.cancel();
+    				mediaPlayer.stop();
+    			}
+    		});
+    		builder.create().show();
+        }
 
 		// Show the Up button in the action bar.
 				

@@ -3,6 +3,7 @@ package ro.medapp1;
 import java.util.Locale;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -49,7 +50,13 @@ public class MedSettings extends FragmentActivity {
 		mViewPager = (ViewPager) findViewById(R.id.med_settings_pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
-		
+		Intent i = getIntent();
+		if (i != null && (i.getIntExtra("position", -1) != -1)) {
+			int pos = i.getIntExtra("position", -1);
+			if(pos < MedVector.getInstance().getList().size()) {
+				//populam
+			}
+		}
 
 	}
 

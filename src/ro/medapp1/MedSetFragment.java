@@ -1,6 +1,8 @@
 package ro.medapp1;
 
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +13,22 @@ import android.widget.ListView;
 
 public class MedSetFragment extends ListFragment{
 	
-	String medNames[] = {"med1","med2","med3","+"};
+	ArrayAdapter adapter;
+	ArrayList<String> medNames = new ArrayList<String>();
 	static Activity context;
-	
-
 	
 	public MedSetFragment()
 	{
-		
+		ArrayList<Med> list = MedVector.getInstance().getList();
+		for (Med m : list) {
+			medNames.add(m.getName());
+		}
+		medNames.add("+");
 	}
+//	public void update()
+//	{
+//		adapter.add((Object)medNames[medNames.size()-1]);
+//	}
 
 	public void setContext(Activity context)
 	{
@@ -41,10 +50,24 @@ public class MedSetFragment extends ListFragment{
 		if(context!=null)
 		
 		{
-		setListAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames));
-		
+		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames);
+		setListAdapter(adapter);
 		
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		medNames = new ArrayList<String>();
+		ArrayList<Med> list = MedVector.getInstance().getList();
+		for (Med m : list) {
+			medNames.add(m.getName());
+		}
+		medNames.add("+");
+		adapter.notifyDataSetChanged();
+		adapter.notifyDataSetInvalidated();
+		//setListAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames));
 	}
 
 
@@ -55,8 +78,9 @@ public class MedSetFragment extends ListFragment{
 		
 		Class medClass=null;
 		try {
-			medClass = Class.forName("ro.medapp1.MedSettings");
+			medClass = Class.forName("ro.medapp1.MedSetActivity");
 			Intent medSet=new Intent(context,medClass);
+			medSet.putExtra("position", position);
 			startActivity(medSet);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

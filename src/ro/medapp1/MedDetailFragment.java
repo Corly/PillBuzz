@@ -54,10 +54,7 @@ public class MedDetailFragment extends Fragment {
 				container, false);
 
 		// Show the dummy content as text in a TextView.
-		if (mItem != null) {
-			((TextView) rootView.findViewById(R.id.med_detail))
-					.setText(mItem.content);
-		}
+		
 
 		return rootView;
 	}
