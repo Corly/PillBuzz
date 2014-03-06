@@ -1,5 +1,7 @@
 package ro.medapp1;
 
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -11,18 +13,10 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.text.TextUtils; 
-import android.widget.Button;
-import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
-
-
-
-import java.util.List;
+import android.text.TextUtils;
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -228,3 +222,4 @@ public class MedSetActivity extends PreferenceActivity {
 	}
 
 }
+

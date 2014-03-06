@@ -41,4 +41,5 @@ public class DatePickerPreference extends DialogPreference {
 //	protected Object onGetDefaultValue(TypedArray a, int index) {
 //	    return a.getInteger(index, DEFAULT_VALUE);
 //	}
+
 }

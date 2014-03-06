@@ -1,5 +1,6 @@
 package ro.medapp1;
 
+
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;

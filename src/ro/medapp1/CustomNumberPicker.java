@@ -8,7 +8,6 @@ import android.widget.NumberPicker;
 //clasa asta e doar un mic artificiu prin care setam valorile min si max din xml si nu programatic
 //am facut asta deoarece acolo unde trebuia sa le setez nu ma lasa sa instantiez numberpicker-ul
 
-
 public class CustomNumberPicker  extends NumberPicker {
 
 	    public CustomNumberPicker(Context context) {
