@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+
 public class BraceletSetFragment extends Fragment {
 
 	public BraceletSetFragment()

@@ -2,7 +2,7 @@ package ro.medapp1;
 
 import java.util.Locale;
 
-import ro.medapp1.MedSettings.DummySectionFragment;
+
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -34,7 +34,7 @@ public class Settings extends FragmentActivity {
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter1 mSectionsPagerAdapter1;
-	SectionsPagerAdapter2 mSectionsPagerAdapter2;
+
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -52,15 +52,12 @@ public class Settings extends FragmentActivity {
 
 		mSectionsPagerAdapter1 = new SectionsPagerAdapter1(
 				getSupportFragmentManager());
-		mSectionsPagerAdapter2 = new SectionsPagerAdapter2(
-				getSupportFragmentManager());
+	
 		
 		
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.settings_pager);
-		setPager(0);
-
-
+		mViewPager.setAdapter(mSectionsPagerAdapter1);
 	}
 
 //	@Override
@@ -70,17 +67,6 @@ public class Settings extends FragmentActivity {
 //		return true;
 //	}
 
-	public void setPager(int i)
-	{
-		if(i==0)
-		{	
-			mViewPager.setAdapter(mSectionsPagerAdapter1);
-		}
-		else
-		{	
-			mViewPager.setAdapter(mSectionsPagerAdapter2);
-		}
-	}
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -157,58 +143,4 @@ public class Settings extends FragmentActivity {
 		}
 	}
 
-	
-	public class SectionsPagerAdapter2 extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter2(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			Fragment fragment=null;
-			
-			switch(position)
-			{
-				case 0:
-				{
-					MedSetFragment frag=new MedSetFragment();
-					frag.setContext(Settings.this);
-					fragment=(Fragment)frag;
-			
-				}break;
-				case 1:
-				{
-					UserSetFragment frag=new UserSetFragment();
-					fragment=(Fragment)frag;
-				
-				}break;
-			
-			}
-			return fragment;
-		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			
-			return 2;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return "MEDS";
-			case 1:
-				return "USER";
-			}
-			return null;
-		}
-	
-	}
 }
