@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MedApp1</string>
+    <string name="title_med_detail">Med Detail</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_med_settings">MedSettings</string>
+    <string name="title_activity_alarm">Alarm</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string-array name="doze_entries">
+        <item>pills</item>
+        <item>drops</item>
+        <item>ml</item>
+        <item>mg</item>
+    </string-array>
+
+</resources>
