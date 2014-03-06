@@ -59,6 +59,7 @@ public class MedSetActivity extends PreferenceActivity {
 
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.layout.preferences);
+		setContentView(R.layout.settings);
 		
 		//this.addPreferencesFromIntent(new DatepickerPreference(this,null).getIntent());
 		//addPreferencesFromResource(R.layout.datepicker_dialog);
