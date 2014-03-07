@@ -1,87 +1,91 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory 
-        android:title="General Settings"
-        android:key="general_settings">
-   
+    <PreferenceCategory
+        android:key="general_settings"
+        android:title="General Settings" >
 
-    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <EditTextPreference
-        android:capitalize="words"
-        android:inputType="textCapWords"
-        android:key="name"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:defaultValue="add Name"
-        android:singleLine="true"
-        android:title="Name" />
+        <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+        <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
 
-    <EditTextPreference
-        android:capitalize="words"
-        android:inputType="textCapWords"
-        android:defaultValue="add description"
-        android:key="description"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="Description" />
-    <EditTextPreference
-        android:capitalize="words"
-        android:inputType="textCapWords"
-        android:key="administration"
-        android:maxLines="10"
-        android:selectAllOnFocus="true"
-        android:title="Administration" />
-    <ro.medapp1.NumberPickerPreference
-        android:key="dosage"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="Dosage"     
-        
-        />
-    <!--
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="add Name"
+            android:inputType="textCapWords"
+            android:key="name"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Name" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="add description"
+            android:inputType="textCapWords"
+            android:key="description"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Description" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:inputType="textCapWords"
+            android:key="administration"
+            android:maxLines="10"
+            android:selectAllOnFocus="true"
+            android:title="Administration" />
+
+        <ro.medapp1.NumberPickerPreference
+            android:key="dosage"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Dosage" />
+        <!--
          NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it.
-    -->
-    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
-   
- 
-    <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_example_list_titles"
-        android:entryValues="@array/pref_example_list_values"
-        android:key="unit"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="Units" />
-   </PreferenceCategory>
-   <PreferenceCategory 
-        android:title="Time Settings"
-        android:key="time_settings"> 
-     <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_interval_list"
-        android:entryValues="@array/pref_example_list_values"
-        android:key="interval"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="Interval" />
-     
-    <ro.medapp1.DatePickerPreference
-        android:key="startdate"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="Start Date"     
+        -->
+        <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:key="unit"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Units" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="time_settings"
+        android:title="Time Settings" >
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/pref_interval_list"
+            android:entryValues="@array/pref_example_list_values"
+            android:key="interval"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Interval" />
         
-        />
-    
-     <ro.medapp1.DatePickerPreference
-        android:key="stopdate"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="Stop Date"/>     
-        
-   
-     </PreferenceCategory>
+        <ro.medapp1.TimePickerPreference
+            android:key="starttime"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Start Time" />
+
+        <ro.medapp1.DatePickerPreference
+            android:key="startdate"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Start Date" />
+
+        <ro.medapp1.DatePickerPreference
+            android:key="stopdate"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Stop Date" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
