@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -73,7 +74,6 @@ public class MedSetActivity extends PreferenceActivity {
 		bindPreferenceSummaryToValue(findPreference("dosage"));
 		bindPreferenceSummaryToValue(findPreference("interval"));
 		bindPreferenceSummaryToValue(findPreference("startdate"));
-		
 		
 	}
 
