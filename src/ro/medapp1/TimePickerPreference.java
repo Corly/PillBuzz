@@ -60,6 +60,7 @@ package ro.medapp1;
 	            if (callChangeListener(time)) {
 	                persistString(time);
 	            }
+	            setSummary(time);
 	        }
 	    }
 
