@@ -59,7 +59,7 @@ public class MedSetActivity extends PreferenceActivity {
 		// use the older PreferenceActivity APIs.
 
 		// Add 'general' preferences.
-		addPreferencesFromResource(R.layout.preferences);
+		addPreferencesFromResource(R.xml.preferences);
 		setContentView(R.layout.settings);
 		
 		//this.addPreferencesFromIntent(new DatepickerPreference(this,null).getIntent());
@@ -197,7 +197,7 @@ public class MedSetActivity extends PreferenceActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.layout.preferences);
+			addPreferencesFromResource(R.xml.preferences);
 
 			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
 			// to their values. When their values change, their summaries are

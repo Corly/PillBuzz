@@ -2,15 +2,13 @@ package ro.medapp1;
 
 import java.util.Locale;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 
-public class Settings extends FragmentActivity {
+public class Settings extends Activity {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,7 +36,7 @@ public class Settings extends FragmentActivity {
 
 
 		mSectionsPagerAdapter1 = new SectionsPagerAdapter1(
-				getSupportFragmentManager());
+				getFragmentManager());
 	
 		
 		
@@ -58,7 +56,7 @@ public class Settings extends FragmentActivity {
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
-	public class SectionsPagerAdapter1 extends FragmentStatePagerAdapter {
+	public class SectionsPagerAdapter1 extends android.support.v13.app.FragmentPagerAdapter {
 
 		public SectionsPagerAdapter1(FragmentManager fm) {
 			super(fm);
@@ -82,37 +80,21 @@ public class Settings extends FragmentActivity {
 				}break;
 				case 1:
 				{
-					UserSetFragment frag=new UserSetFragment();
+					UserBraceletSetFragment frag=new UserBraceletSetFragment();
 					fragment=(Fragment)frag;
 				
 				}break;
-				case 2:
-				{
-					BraceletSetFragment frag=new BraceletSetFragment();
-					fragment=(Fragment)frag;			
-					
-				}break;
-			
+				
 			}
 			return fragment;
 		}
-		@Override
-		public int getItemPosition(Object item)
-		{
-//			if(item instanceof MedSetFragment)
-//			{
-//				((MedSetFragment)item).update();
-//			}
-//			
-			return super.getItemPosition(item);
-			
-		}
+
 
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
 			
-			return 3;
+			return 2;
 		}
 
 		@Override
@@ -122,9 +104,8 @@ public class Settings extends FragmentActivity {
 			case 0:
 				return "MEDS";
 			case 1:
-				return "USER";
-			case 2:
-				return "BRACELET";
+				return "SETTINGS";
+	
 			}
 			return null;
 		}

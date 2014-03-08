@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <PreferenceCategory
+        android:key="user_settings"
+        android:title="User Settings" >
+        <CheckBoxPreference
+            android:key="silent_preference"
+            android:title="Silent" />
+        <CheckBoxPreference
+            android:key="bracelet_preference"
+            android:title="Bracelet" />
+        <EditTextPreference
+    android:key="password"
+    android:title="Password"
+    android:inputType="textPassword" />
+    </PreferenceCategory>
+
+    
+    <PreferenceCategory
+        android:key="user_settings"
+        android:title="User Settings" >
+      <ro.medapp1.NumberPickerPreference
+            android:key="delay"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Delay" />
+      <ro.medapp1.NumberPickerPreference
+            android:key="buffer"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Buffer Time" />     
+    </PreferenceCategory>
+</PreferenceScreen>

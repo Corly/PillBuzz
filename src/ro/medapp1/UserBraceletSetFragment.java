@@ -22,7 +22,7 @@ public class UserBraceletSetFragment  extends PreferenceFragment {
 		super.onCreate(savedInstanceState);
 
 		// Load the preferences from an XML resource
-		addPreferencesFromResource(R.layout.preferences);
+		addPreferencesFromResource(R.xml.user_preferences);
 	}
 
 
