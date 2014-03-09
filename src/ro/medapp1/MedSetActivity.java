@@ -72,15 +72,15 @@ public class MedSetActivity extends PreferenceActivity {
 		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
-		bindPreferenceSummaryToValue(findPreference("name"));
-		bindPreferenceSummaryToValue(findPreference("description"));
-		bindPreferenceSummaryToValue(findPreference("unit"));
-		bindPreferenceSummaryToValue(findPreference("administration"));
-		bindPreferenceSummaryToValue(findPreference("dosage"));
-		bindPreferenceSummaryToValue(findPreference("interval"));
-		bindPreferenceSummaryToValue(findPreference("startdate"));
-		bindPreferenceSummaryToValue(findPreference("stopdate"));
-		bindPreferenceSummaryToValue(findPreference("starttime"));
+		bindPreferenceSummaryToStringValue(findPreference("name"));
+		bindPreferenceSummaryToStringValue(findPreference("description"));
+		bindPreferenceSummaryToStringValue(findPreference("unit"));
+		bindPreferenceSummaryToStringValue(findPreference("administration"));
+		bindPreferenceSummaryToStringValue(findPreference("interval"));
+		bindPreferenceSummaryToStringValue(findPreference("startdate"));
+		bindPreferenceSummaryToStringValue(findPreference("stopdate"));
+		bindPreferenceSummaryToStringValue(findPreference("starttime"));
+		bindPreferenceSummaryToIntValue(findPreference("dosage"));
 		
 		//Save the medicine
 		Button save = (Button) findViewById(R.id.button_save_med);
@@ -252,7 +252,7 @@ public class MedSetActivity extends PreferenceActivity {
 	 * 
 	 * @see #sBindPreferenceSummaryToValueListener
 	 */
-	private static void bindPreferenceSummaryToValue(Preference preference) {
+	private static void bindPreferenceSummaryToStringValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
 				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -265,6 +265,21 @@ public class MedSetActivity extends PreferenceActivity {
 						preference.getContext()).getString(preference.getKey(),
 						""));
 	}
+	
+	private static void bindPreferenceSummaryToIntValue(Preference preference) {
+		// Set the listener to watch for value changes.
+		preference
+				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+
+		// Trigger the listener immediately with the preference's
+		// current value.
+		sBindPreferenceSummaryToValueListener.onPreferenceChange(
+				preference,
+				PreferenceManager.getDefaultSharedPreferences(
+						preference.getContext()).getInt(preference.getKey(),
+						-1));
+	}
+	
 
 	/**
 	 * This fragment shows general preferences only. It is used when the

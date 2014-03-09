@@ -65,8 +65,10 @@ public class MedSetFragment extends ListFragment{
 			medNames.add(m.getName());
 		}
 		medNames.add("+");
-		adapter.notifyDataSetChanged();
-		adapter.notifyDataSetInvalidated();
+		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames);
+		setListAdapter(adapter);
+		//adapter.notifyDataSetChanged();
+		//adapter.notifyDataSetInvalidated();
 		//setListAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames));
 	}
 
