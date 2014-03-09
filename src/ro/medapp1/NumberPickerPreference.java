@@ -1,10 +1,13 @@
 package ro.medapp1;
 
-
 import android.content.Context;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.NumberPicker;
+
 public class NumberPickerPreference extends DialogPreference {
+	private NumberPicker picker;
 
 	public NumberPickerPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -16,10 +19,20 @@ public class NumberPickerPreference extends DialogPreference {
 	}
 
 	@Override
+	protected View onCreateDialogView() {
+		picker = new NumberPicker(getContext());
+		picker.setMaxValue(500);
+		picker.setMinValue(0);
+		return picker;
+	}
+
+	@Override
 	protected void onDialogClosed(boolean positiveResult) {
 		// When the user selects "OK", persist the new value
 		if (positiveResult) {
-			// persistInt(mNewValue);
+			int number = picker.getValue();
+			persistInt(number);
+			setSummary(number + "");
 		}
 	}
 
