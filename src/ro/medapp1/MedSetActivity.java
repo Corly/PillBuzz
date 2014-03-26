@@ -1,6 +1,7 @@
 package ro.medapp1;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -139,13 +140,14 @@ public class MedSetActivity extends PreferenceActivity {
 					stopDateYear = Integer.parseInt(pieces[2]);
 				}
 				
+				AtomicInteger atomicInteger = new AtomicInteger();
 				Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
 						startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
-						stopDateDay, stopDateMonth, stopDateYear);
+						stopDateDay, stopDateMonth, stopDateYear, atomicInteger.getAndIncrement());
 				
 				//ar trebui adaugat medicamentul cu addMedToList care seteaza si alarma.
 				//dar momentan pentru test tinem asa.
-				MedVector.getInstance().getList().add(medicine);
+				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
 				
 				finish();
 				

@@ -1,6 +1,6 @@
 package ro.medapp1;
 
-import android.app.PendingIntent;
+import android.content.Intent;
 
 public class Med {
 	private String name;
@@ -8,7 +8,7 @@ public class Med {
 	private String description;
 	private String unit;
 	private int dosage;
-	private PendingIntent alarmIntent;
+	private Intent alarmIntent;
 	private int interval;
 	private int firstDoseHour;
 	private int firstDoseMinute;
@@ -18,14 +18,15 @@ public class Med {
 	private int endDateDay;
 	private int endDateMonth;
 	private int endDateYear;
+	private int intentID;
 	
 	public Med(){}
-	
+
 	public Med(String name, String description, String administration,
 			int dosage, String unit, int interval, int startTimeHour,
 			int startTimeMinute, int startDateDay, int startDateMonth,
 			int startDateYear, int endDateDay, int endDateMonth, 
-			int endDateYear) {
+			int endDateYear, int intentID) {
 		
 		this.name = name;
 		this.description = description;
@@ -33,6 +34,7 @@ public class Med {
 		this.dosage = dosage;
 		this.interval = interval;
 		this.unit = unit;
+		this.intentID = intentID;
 		
 		this.startDateDay = startDateDay;
 		this.startDateMonth = startDateMonth;
@@ -101,13 +103,21 @@ public class Med {
 	public int getStartDateYear() {
 		return startDateYear;
 	}
-
-	public PendingIntent getAlarmIntent() {
+	
+	public int getIntentID() {
+		return intentID;
+	}
+	
+	public Intent getAlarmIntent() {
 		return alarmIntent;
 	}
-
+	
 	public void setInterval(int interval) {
 		this.interval = interval;
+	}
+	
+	public void setIntentID(int intentID) {
+		this.intentID = intentID;
 	}
 	
 	public void setUnit(String unit) {
@@ -162,10 +172,10 @@ public class Med {
 		this.startDateYear = startDateYear;
 	}
 	
-	public void setAlarmIntent(PendingIntent alarmIntent) {
+	public void setAlarmIntent(Intent alarmIntent) {
 		this.alarmIntent = alarmIntent;
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
 		Med x = (Med) o;
