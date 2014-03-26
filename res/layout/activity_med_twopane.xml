@@ -6,21 +6,19 @@
     android:divider="?android:attr/dividerVertical"
     android:orientation="vertical"
     android:showDividers="middle"
-    android:weightSum="7"
     tools:context=".MedListActivity" >
- 
-               <TextView
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="top"
-        android:background="#33b5e5"
+        android:background="@color/lightblue"
+        android:gravity="center"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:textColor="#fff" 
-        android:text="HOME"/>
-        
-   
+        android:text="HOME"
+        android:textColor="#fff"
+        android:textSize="20dp" />
 
     <!--
     This layout is a two-pane layout for the Meds
@@ -32,68 +30,138 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-<LinearLayout
-     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
-    android:orientation="horizontal"
-     android:showDividers="middle"
-     android:layout_weight="1" >
-    <fragment
-        android:id="@+id/med_list"
-        android:name="ro.medapp1.MedListFragment"
-        android:layout_width="0dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@android:layout/list_content" />
+        android:baselineAligned="false"
+        android:divider="?android:attr/dividerHorizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle" >
 
-    <FrameLayout
-        android:id="@+id/med_detail_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3" />
+        <fragment
+            android:id="@+id/med_list"
+            android:name="ro.medapp1.MedListFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@android:layout/list_content" />
+
+        <FrameLayout
+            android:id="@+id/med_detail_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/green" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_weight="6"
         android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:orientation="horizontal" 
-    	android:weightSum="8"
-    >
-<Button
-        android:id="@+id/NotesButton"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-       android:padding="10dp"
-        android:text="Notes"      
-        ></Button>
-<Button
-        android:id="@+id/SnoozeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:padding="10dp"
-        android:text="Snooze"      
-        ></Button>
-<Button
-        android:id="@+id/ExtraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-         android:padding="10dp"
-        android:text="Extra"      
-        ></Button>
-<Button
-        android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-         android:padding="10dp"
-        android:text="Settings"      
-        ></Button>
-</LinearLayout>
+        android:layout_weight="3"
+        android:background="@color/lightblue"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="6" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/SnoozeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/NotesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/CalendarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="6" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/CallButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/ExtraButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <Button
+                    android:id="@+id/SettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp" >
+                </Button>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

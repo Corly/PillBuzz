@@ -6,24 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     android:textIsSelectable="true"
     tools:context=".MedDetailFragment" >
 
     <TextView
-        android:id="@+id/name_textview0987"
+        android:id="@+id/medNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:text="Paracetamol"/>
 
     <TextView
-        android:id="@+id/description_textview0877"
+        android:id="@+id/medDescriptionTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:text="Medication usefull when having a cold or a headache"/>
 
     <TextView
-        android:id="@+id/administraion_textview9865"
+        android:id="@+id/medDosageTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:text="3 per day"/>

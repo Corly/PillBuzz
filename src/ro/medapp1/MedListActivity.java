@@ -1,5 +1,6 @@
 package ro.medapp1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
@@ -26,16 +27,19 @@ import android.widget.Button;
 public class MedListActivity extends FragmentActivity implements
 		MedListFragment.Callbacks {
 	
+	
+	public static Activity context=null;
 	public static float text_size;
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
 	 */
-	private boolean mTwoPane;
+	boolean mTwoPane;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context=this;
 		setContentView(R.layout.activity_med_list);
 		
 		
@@ -53,14 +57,27 @@ public class MedListActivity extends FragmentActivity implements
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			((MedListFragment) getSupportFragmentManager().findFragmentById(
-					R.id.med_list)).setActivateOnItemClick(true);
+			
+			MedListFragment listFragment=((MedListFragment) getSupportFragmentManager().findFragmentById(
+					R.id.med_list));
+			listFragment.setActivateOnItemClick(true);
+			
 		}
 		
-		
+		Button snooze=(Button) findViewById(R.id.SnoozeButton);
+		snooze.setBackgroundResource(R.drawable.snooze);
+		Button notes=(Button) findViewById(R.id.NotesButton);
+		notes.setBackgroundResource(R.drawable.notes);
+		Button calendar=(Button) findViewById(R.id.CalendarButton);
+		calendar.setBackgroundResource(R.drawable.calendar);
+		Button call=(Button) findViewById(R.id.CallButton);
+		call.setBackgroundResource(R.drawable.phone);
+		Button extra=(Button) findViewById(R.id.ExtraButton);
+		extra.setBackgroundResource(R.drawable.extra);
 		
 		
 		Button settings=(Button) findViewById(R.id.SettingsButton);
+		settings.setBackgroundResource(R.drawable.settings);
 		settings.setOnClickListener(new View.OnClickListener(){
 
 			@Override

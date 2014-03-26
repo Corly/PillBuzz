@@ -1,16 +1,27 @@
 package ro.medapp1;
 
+import ro.medapp1.dummy.DummyContent;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.app.ListActivity;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import ro.medapp1.dummy.DummyContent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A list fragment representing a list of Meds. This fragment also supports
@@ -69,14 +80,39 @@ public class MedListFragment extends ListFragment {
 	public MedListFragment() {
 	}
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//				setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+		//						android.R.layout.simple_list_item_activated_1,
+		//						android.R.id.text1, DummyContent.ITEMS));	
 
-		// TODO: replace with a real list adapter.
-		setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, DummyContent.ITEMS));
+
+
+		// if extending Activity
+		//setContentView(R.layout.activity_main);
+
+		// 1. pass context and data to the custom adapter
+		MyAdapter adapter = new MyAdapter(getActivity(), generateData());
+
+		// if extending Activity 2. Get ListView from activity_main.xml
+		//ListView listView = (ListView) findViewById(R.id.med_list);
+
+		// 3. setListAdapter
+		//listView.setAdapter(adapter); if extending Activity
+		setListAdapter(adapter);
+	}
+
+
+	private ArrayList<Model> generateData(){
+		ArrayList<Model> models = new ArrayList<Model>();
+		models.add(new Model("Group Title"));
+		models.add(new Model("Menu Item 1","1"));
+		models.add(new Model("Menu Item 2","2"));
+		models.add(new Model("Menu Item 3","3"));
+
+		return models;
 	}
 
 
@@ -90,11 +126,13 @@ public class MedListFragment extends ListFragment {
 			setActivatedPosition(savedInstanceState
 					.getInt(STATE_ACTIVATED_POSITION));
 		}
+
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+
 
 		// Activities containing this fragment must implement its callbacks.
 		if (!(activity instanceof Callbacks)) {
@@ -117,7 +155,9 @@ public class MedListFragment extends ListFragment {
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
 		super.onListItemClick(listView, view, position, id);
-
+//	TextView text =(TextView)getActivity().findViewById(R.id.medNameTV);
+//text.setText(position);
+		
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
 		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
