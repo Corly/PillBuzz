@@ -4,13 +4,13 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -18,6 +18,10 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -50,6 +54,7 @@ public class MedSetActivity extends PreferenceActivity {
 	 * device configuration dictates that a simplified, single-pane UI should be
 	 * shown.
 	 */
+	@SuppressWarnings("deprecation")
 	private void setupSimplePreferencesScreen() {
 		if (!isSimplePreferences(this)) {
 			return;
@@ -67,13 +72,86 @@ public class MedSetActivity extends PreferenceActivity {
 		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
-		bindPreferenceSummaryToValue(findPreference("name"));
-		bindPreferenceSummaryToValue(findPreference("description"));
-		bindPreferenceSummaryToValue(findPreference("unit"));
-		bindPreferenceSummaryToValue(findPreference("administration"));
-		bindPreferenceSummaryToValue(findPreference("dosage"));
-		bindPreferenceSummaryToValue(findPreference("interval"));
-		bindPreferenceSummaryToValue(findPreference("startdate"));
+		bindPreferenceSummaryToStringValue(findPreference("name"));
+		bindPreferenceSummaryToStringValue(findPreference("description"));
+		bindPreferenceSummaryToStringValue(findPreference("unit"));
+		bindPreferenceSummaryToStringValue(findPreference("administration"));
+		bindPreferenceSummaryToStringValue(findPreference("interval"));
+		bindPreferenceSummaryToStringValue(findPreference("startdate"));
+		bindPreferenceSummaryToStringValue(findPreference("stopdate"));
+		bindPreferenceSummaryToStringValue(findPreference("starttime"));
+		bindPreferenceSummaryToIntValue(findPreference("dosage"));
+		
+		//Save the medicine
+		Button save = (Button) findViewById(R.id.button_save_med);
+		save.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences details = PreferenceManager
+						.getDefaultSharedPreferences(getApplicationContext());
+				//get the details about the medicine
+				String name = details.getString("name", "No Name");
+				String description = details.getString("description", "No Description");
+				String administration = details.getString("administration", "No Administration");
+				int dosage = details.getInt("dosage", -1);
+				
+				String startDate = details.getString("startdate", "No start date");
+				String stopDate = details.getString("stopdate", "No stop date");
+				String startTime = details.getString("starttime", "No start time");
+				
+				ListPreference listPreferenceUnit = (ListPreference) findPreference("unit");
+				String unit = listPreferenceUnit.getEntry().toString();
+				
+				ListPreference listPreferenceInterval = (ListPreference) findPreference("interval");
+				String interval = listPreferenceInterval.getEntry().toString();
+				
+				int timeInterval = -1;
+				int startTimeHour = -1;
+				int startTimeMinute = -1;
+				int startDateDay = -1;
+				int startDateMonth = -1;
+				int startDateYear = -1;
+				int stopDateDay = -1;
+				int stopDateMonth = -1;
+				int stopDateYear = -1;
+				if (!interval.equals("")) {
+					timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
+				}
+				
+				if (!startTime.equals("")) {
+					String[] pieces = startTime.split(":");
+					startTimeHour = Integer.parseInt(pieces[0]);
+					startTimeMinute = Integer.parseInt(pieces[1]);
+				}
+				
+				if (!startDate.equals("")) {
+					String[] pieces = startDate.split("/");
+					startDateDay = Integer.parseInt(pieces[0]);
+					startDateMonth = Integer.parseInt(pieces[1]);
+					startDateYear = Integer.parseInt(pieces[2]);
+				}
+				
+				if (!stopDate.equals("")) {
+					String[] pieces = stopDate.split("/");
+					stopDateDay = Integer.parseInt(pieces[0]);
+					stopDateMonth = Integer.parseInt(pieces[1]);
+					stopDateYear = Integer.parseInt(pieces[2]);
+				}
+				
+				Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
+						startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
+						stopDateDay, stopDateMonth, stopDateYear);
+				
+				//ar trebui adaugat medicamentul cu addMedToList care seteaza si alarma.
+				//dar momentan pentru test tinem asa.
+				MedVector.getInstance().getList().add(medicine);
+				
+				finish();
+				
+				//Toast.makeText(getApplicationContext(), timeInterval + "", Toast.LENGTH_SHORT).show();
+			}
+		});
 		
 	}
 
@@ -174,7 +252,7 @@ public class MedSetActivity extends PreferenceActivity {
 	 * 
 	 * @see #sBindPreferenceSummaryToValueListener
 	 */
-	private static void bindPreferenceSummaryToValue(Preference preference) {
+	private static void bindPreferenceSummaryToStringValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
 				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -187,6 +265,21 @@ public class MedSetActivity extends PreferenceActivity {
 						preference.getContext()).getString(preference.getKey(),
 						""));
 	}
+	
+	private static void bindPreferenceSummaryToIntValue(Preference preference) {
+		// Set the listener to watch for value changes.
+		preference
+				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+
+		// Trigger the listener immediately with the preference's
+		// current value.
+		sBindPreferenceSummaryToValueListener.onPreferenceChange(
+				preference,
+				PreferenceManager.getDefaultSharedPreferences(
+						preference.getContext()).getInt(preference.getKey(),
+						-1));
+	}
+	
 
 	/**
 	 * This fragment shows general preferences only. It is used when the

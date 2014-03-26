@@ -6,14 +6,10 @@ public class Med {
 	private String name;
 	private String administrationMethod;
 	private String description;
-	private String previousDrugs;
-	private String drugInteraction;
-	private String picture;
 	private String unit;
+	private int dosage;
 	private PendingIntent alarmIntent;
 	private int interval;
-	private int dosage;
-	private String typeOfDosage;
 	private int firstDoseHour;
 	private int firstDoseMinute;
 	private int startDateDay;
@@ -22,6 +18,33 @@ public class Med {
 	private int endDateDay;
 	private int endDateMonth;
 	private int endDateYear;
+	
+	public Med(){}
+	
+	public Med(String name, String description, String administration,
+			int dosage, String unit, int interval, int startTimeHour,
+			int startTimeMinute, int startDateDay, int startDateMonth,
+			int startDateYear, int endDateDay, int endDateMonth, 
+			int endDateYear) {
+		
+		this.name = name;
+		this.description = description;
+		this.administrationMethod = administration;
+		this.dosage = dosage;
+		this.interval = interval;
+		this.unit = unit;
+		
+		this.startDateDay = startDateDay;
+		this.startDateMonth = startDateMonth;
+		this.startDateYear = startDateYear;
+		
+		this.endDateDay = endDateDay;
+		this.endDateMonth = endDateMonth;
+		this.endDateYear = endDateYear;
+		
+		this.firstDoseHour = startTimeHour;
+		this.firstDoseMinute = startTimeMinute;
+	}
 
 	public int getInterval() {
 		return interval;
@@ -29,10 +52,6 @@ public class Med {
 	
 	public String getUnit() {
 		return unit;
-	}
-	
-	public String getTypeOfDosage() {
-		return typeOfDosage;
 	}
 	
 	public String getAdministrationMethod() {
@@ -71,10 +90,6 @@ public class Med {
 		return name;
 	}
 
-	public String getPicture() {
-		return picture;
-	}
-
 	public int getStartDateDay() {
 		return startDateDay;
 	}
@@ -87,14 +102,6 @@ public class Med {
 		return startDateYear;
 	}
 
-	public String getDrugInteraction() {
-		return drugInteraction;
-	}
-
-	public String getPreviousDrugs() {
-		return previousDrugs;
-	}
-
 	public PendingIntent getAlarmIntent() {
 		return alarmIntent;
 	}
@@ -105,10 +112,6 @@ public class Med {
 	
 	public void setUnit(String unit) {
 		this.unit = unit;
-	}
-	
-	public void setTypeOfDosage(String typeOfDosage) {
-		this.typeOfDosage = typeOfDosage;
 	}
 	
 	public void setAdministrationMethod(String administrationMethod) {
@@ -147,10 +150,6 @@ public class Med {
 		this.name = name;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
 	public void setStartDateDay(int startDateDay) {
 		this.startDateDay = startDateDay;
 	}
@@ -161,14 +160,6 @@ public class Med {
 
 	public void setStartDateYear(int startDateYear) {
 		this.startDateYear = startDateYear;
-	}
-
-	public void setDrugInteraction(String drugInteraction) {
-		this.drugInteraction = drugInteraction;
-	}
-
-	public void setPreviousDrugs(String previousDrugs) {
-		this.previousDrugs = previousDrugs;
 	}
 	
 	public void setAlarmIntent(PendingIntent alarmIntent) {

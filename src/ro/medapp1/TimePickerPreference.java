@@ -55,7 +55,12 @@ package ro.medapp1;
 	            lastHour=picker.getCurrentHour();
 	            lastMinute=picker.getCurrentMinute();
 
-	            String time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
+	            String time;
+	            if (lastMinute < 10) {
+	            	time=String.valueOf(lastHour)+":0"+String.valueOf(lastMinute);
+	            } else {
+	            	time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
+	            }
 
 	            if (callChangeListener(time)) {
 	                persistString(time);
