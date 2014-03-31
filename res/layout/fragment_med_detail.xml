@@ -1,30 +1,114 @@
 <LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/med_detail244555"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:textIsSelectable="true"
-    tools:context=".MedDetailFragment" >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/med_detail244555"
 
-    <TextView
-        android:id="@+id/medNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Paracetamol"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:textIsSelectable="true"
+        tools:context=".MedDetailFragment"
+        >
 
-    <TextView
-        android:id="@+id/medDescriptionTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Medication usefull when having a cold or a headache"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/background"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:gravity="center">
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton" android:layout_gravity="left"
+                    android:src="@drawable/sageata" android:padding="5pt"/>
+            <TextView
 
-    <TextView
-        android:id="@+id/medDosageTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="3 per day"/>
+                    android:id="@+id/name_textview0987"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Paracetamol" android:textSize="40dp"
+                    android:textIsSelectable="false" android:layout_gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" android:textStyle="bold" android:layout_weight="1"
+                    style="@style/TextStyle" android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="false"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center" android:layout_weight="2">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:layout_weight="2"
+                    android:src="@drawable/clock"
+                    android:layout_gravity="center_vertical|left"/>
+
+            <Space
+                    android:layout_width="20px"
+                    android:layout_height="20px"
+                    android:id="@+id/space" android:layout_weight="1"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="08:30"
+                    android:id="@+id/textView"
+                    android:textIsSelectable="false" android:layout_gravity="center|right"
+                    style="@style/TextStyle"
+                    android:textSize="40dp"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/administraion_textview9865"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="1/2 pill"
+
+                android:textIsSelectable="false" android:layout_gravity="center"
+                style="@style/TextStyle" android:gravity="center" android:layout_weight="1"/>
+
+        <TextView
+                android:id="@+id/description_textview0877"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle"
+                android:textSize="30dp"
+                android:text="High blood pressure"
+                android:textIsSelectable="false" android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" android:layout_weight="1"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView1" android:layout_gravity="center" android:layout_weight="3"
+                android:src="@drawable/photo"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To be taken with a glass of watter before breakfast."
+                android:id="@+id/textView1" android:layout_weight="4" android:gravity="center"
+                style="@style/TextStyle"
+				android:paddingLeft="5pt" android:paddingRight="5pt"
+                android:paddingBottom="5pt"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5pt"
+                android:id="@+id/arrow" android:gravity="center|center_horizontal"
+                android:src="@drawable/more" android:layout_gravity="center"/>
+    </LinearLayout>
 
 </LinearLayout>

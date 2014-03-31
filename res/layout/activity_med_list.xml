@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:showDividers="middle"
     android:weightSum="10"
+    android:background="@color/lightblue"
     tools:context=".MedLetailFragment" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="@color/lightblue"
         android:gravity="center"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
@@ -27,6 +27,7 @@
         android:divider="?android:attr/dividerVertical"
         android:orientation="vertical"
         android:showDividers="middle"
+        android:background="@drawable/background"
         android:weightSum="4" >
 
         <fragment
