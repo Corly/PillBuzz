@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 
 /**
  * An activity representing a single Med detail screen. This activity is only
@@ -29,6 +30,7 @@ public class MedDetailActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_med_detail);
 		
+		
 		Log.d("Hello","Balloo");
 		Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("fromAlarm", false)) {
@@ -45,7 +47,8 @@ public class MedDetailActivity extends FragmentActivity {
     		builder.setMessage("You have to take some pills");
     		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
-    			
+    	
+    		
     			@Override
     			public void onClick(DialogInterface dialog, int which) {
     				v.cancel();

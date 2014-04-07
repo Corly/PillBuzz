@@ -5,20 +5,22 @@
     android:orientation="horizontal" 
     >
 
-    <Button
+    <ImageButton
         android:id="@+id/takenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="V" ></Button>
+        android:background="@color/white"
+        android:padding="5dp"
+        android:src="@drawable/checked"
+     ></ImageButton>
         <!-- title -->
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/item_counter"
-            android:layout_toRightOf="@+id/item_icon"
-            android:textSize="18dp" />
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:textColor="@color/darkblue" />
     
 
 </LinearLayout>

@@ -107,10 +107,10 @@ public class MedListFragment extends ListFragment {
 
 	private ArrayList<Model> generateData(){
 		ArrayList<Model> models = new ArrayList<Model>();
-		models.add(new Model("Group Title"));
-		models.add(new Model("Menu Item 1","1"));
-		models.add(new Model("Menu Item 2","2"));
-		models.add(new Model("Menu Item 3","3"));
+		models.add(new Model("02/04/2014"));
+		models.add(new Model("Paracetamol","1"));
+		//models.add(new Model("Paracetamol","2"));
+		//models.add(new Model("Paracetamol","3"));
 
 		return models;
 	}
