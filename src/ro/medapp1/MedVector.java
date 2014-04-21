@@ -5,13 +5,28 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
+
+import java.net.MalformedURLException;
+
+
 public class MedVector {
+	
+	
+	private static int serviceItemCounter=0;
+	private MobileServiceClient mClient;
+	private MobileServiceTable<Med> serviceMedTable;
+
 	private static MedVector INSTANCE = new MedVector();
 	private ArrayList<Med> list = new ArrayList<Med>();
 	private final long HOUR = 3600 * 1000; //hours in miliseconds
@@ -22,6 +37,8 @@ public class MedVector {
 	public static MedVector getInstance() {
 		return INSTANCE;
 	}
+	
+	
 
 	public ArrayList<Med> getList() {
 		return list;
@@ -108,6 +125,8 @@ public class MedVector {
 		calSet.set(Calendar.SECOND, 0);
 		calSet.set(Calendar.MILLISECOND, 0);
 		med.setAlarmIntent(setAlarm(calSet, context));*/
+	
+				
 		return list.add(med);
 	}
 
@@ -159,5 +178,63 @@ public class MedVector {
 				interval * HOUR, pendingIntent);
 		
 	}
+	/**
+	 * uploadeaza vectorul de medicamente pe azure
+	 *TODO
+	 *verificarea daca exista sau nu medicamentul deja
+	 *updatarea medicamentelor existente
+	 *stergerea meicamentelor
+	 * @param context
+	 */
+	
+	public void updateServerDatabase(final Context context)
+	{
+		
+		try {
+			// Create the Mobile Service Client instance, using the provided
+			// Mobile Service URL and key
+			mClient = new MobileServiceClient( "https://pillbuzz.azure-mobile.net/", "gKTzUXhsGvQWrIiyoBXYlJluHiOQhc45", context );
+
+			// Get the Mobile Service Table instance to use
+			serviceMedTable = mClient.getTable(Med.class);
+		} catch (MalformedURLException e) {
+			createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error",context);
+		}
+		
+		
+		for(int i=0; i<list.toArray().length; i++)
+		{
+			
+			serviceMedTable.insert(list.get(i), new TableOperationCallback<Med>() {
+
+				public void onCompleted(Med entity, Exception exception, ServiceFilterResponse response) {
+					
+					if (exception == null) {
+						
+					} else {
+						createAndShowDialog(exception, "Error",context);
+					}
+
+				}
+			});
+
+		}
+		
+		serviceItemCounter=list.toArray().length;
+	}
+	
+	private void createAndShowDialog(Exception exception, String title, Context context) {
+		Throwable ex = exception;
+		if(exception.getCause() != null){
+			ex = exception.getCause();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+		builder.setMessage(ex.getMessage());
+		builder.setTitle(title);
+		builder.create().show();
+
+	}
 
 }
+

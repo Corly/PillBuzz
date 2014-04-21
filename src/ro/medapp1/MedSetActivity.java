@@ -1,9 +1,16 @@
 package ro.medapp1;
 
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
+
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -22,7 +29,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -42,12 +48,12 @@ public class MedSetActivity extends PreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+		
 	}
 
 	/**
@@ -149,6 +155,8 @@ public class MedSetActivity extends PreferenceActivity {
 				//dar momentan pentru test tinem asa.
 				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
 				
+		//		MedVector.getInstance().updateServerDatabase(MedSetActivity.this);
+							
 				finish();
 				
 				//Toast.makeText(getApplicationContext(), timeInterval + "", Toast.LENGTH_SHORT).show();
@@ -157,6 +165,18 @@ public class MedSetActivity extends PreferenceActivity {
 		
 	}
 
+	private void createAndShowDialog(Exception exception, String title, Context context) {
+		Throwable ex = exception;
+		if(exception.getCause() != null){
+			ex = exception.getCause();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+		builder.setMessage(ex.getMessage());
+		builder.setTitle(title);
+		builder.create().show();
+
+	}
 	/** {@inheritDoc} */
 	@Override
 	public boolean onIsMultiPane() {

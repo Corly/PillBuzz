@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
 
 /**
  * An activity representing a single Med detail screen. This activity is only

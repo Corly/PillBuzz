@@ -1,14 +1,20 @@
 package ro.medapp1;
 
+
 import android.content.Intent;
 
 public class Med {
+	private static Integer idCounter=0;
+	@com.google.gson.annotations.SerializedName("id")
+	private String id;
+	@com.google.gson.annotations.SerializedName("name")
 	private String name;
 	private String administrationMethod;
 	private String description;
 	private String unit;
 	private int dosage;
-	private Intent alarmIntent;
+	//ignored by Windows Azure
+	transient private Intent alarmIntent;
 	private int interval;
 	private int firstDoseHour;
 	private int firstDoseMinute;
@@ -19,14 +25,19 @@ public class Med {
 	private int endDateMonth;
 	private int endDateYear;
 	private int intentID;
+
 	
-	public Med(){}
+	public Med(){
+		
+	}
 
 	public Med(String name, String description, String administration,
 			int dosage, String unit, int interval, int startTimeHour,
 			int startTimeMinute, int startDateDay, int startDateMonth,
 			int startDateYear, int endDateDay, int endDateMonth, 
 			int endDateYear, int intentID) {
+	
+		this.id=(idCounter++).toString();
 		
 		this.name = name;
 		this.description = description;
@@ -68,6 +79,10 @@ public class Med {
 		return dosage;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public int getEndDateDay() {
 		return endDateDay;
 	}
@@ -88,9 +103,6 @@ public class Med {
 		return firstDoseMinute;
 	}
 
-	public String getName() {
-		return name;
-	}
 
 	public int getStartDateDay() {
 		return startDateDay;
@@ -136,6 +148,15 @@ public class Med {
 		this.dosage = dosage;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+	public String getId() {
+		return id;
+	}
+
 	public void setEndDateDay(int endDateDay) {
 		this.endDateDay = endDateDay;
 	}
@@ -156,10 +177,6 @@ public class Med {
 		this.firstDoseMinute = firstDoseMinute;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setStartDateDay(int startDateDay) {
 		this.startDateDay = startDateDay;
 	}
@@ -175,7 +192,17 @@ public class Med {
 	public void setAlarmIntent(Intent alarmIntent) {
 		this.alarmIntent = alarmIntent;
 	}
-	
+
+
+
+	public static Integer getIdCounter() {
+		return idCounter;
+	}
+
+	public static void setIdCounter(Integer idCounter) {
+		Med.idCounter = idCounter;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		Med x = (Med) o;
