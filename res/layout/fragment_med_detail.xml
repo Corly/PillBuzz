@@ -8,7 +8,6 @@
         android:textIsSelectable="true"
         tools:context=".MedDetailFragment"
         >
-        <ScrollView>
 
     <LinearLayout
             android:orientation="vertical"
@@ -123,5 +122,5 @@
                 android:id="@+id/arrow" android:gravity="center|center_horizontal"
                 android:src="@drawable/more" android:layout_gravity="center"/>
     </LinearLayout>
-</ScrollView>
+
 </LinearLayout>
