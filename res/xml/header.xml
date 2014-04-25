@@ -2,20 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
- 
-    android:background="@color/darkgrey"
-     >
+    android:background="@drawable/gradient" 
+    >
  
     <!-- title -->
     <TextView
          android:id="@+id/header"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+         android:layout_height="match_parent"
          android:gravity="center"
          android:textSize="16dp"
-         android:layout_marginLeft="12dp"
          android:layout_marginBottom="4dp"
          android:layout_alignParentBottom="true"          
+         android:textColor="#ffffff" 
+         
+         android:autoText="true"
            />
  
     <!--  divider -->
@@ -28,3 +29,4 @@
          ></View>
  
 </RelativeLayout>
+

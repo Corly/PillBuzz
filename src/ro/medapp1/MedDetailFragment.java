@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A fragment representing a single Med detail screen. This fragment is either
@@ -36,6 +37,10 @@ public class MedDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+
+
+		
+		
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
@@ -51,6 +56,7 @@ public class MedDetailFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_med_detail,
 				container, false);
 
+	
 		// Show the dummy content as text in a TextView.
 		
 

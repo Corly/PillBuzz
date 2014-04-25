@@ -30,12 +30,10 @@ public class MedListActivity extends FragmentActivity implements
 	
 	public static Activity context=null;
 	public static float text_size;
-	/**
-	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-	 * device.
-	 */
 	boolean mTwoPane;
-
+	Button back, snooze,notes,calendar,call,extra,settings;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +44,7 @@ public class MedListActivity extends FragmentActivity implements
 		//setting the dimention of the text
 		Display display=getWindowManager().getDefaultDisplay();
 		text_size=display.getHeight()/30;
-		
+		 initializeButtons();
 
 		if (findViewById(R.id.med_detail_container) != null) {
 			// The detail container view will be present only in the
@@ -54,6 +52,7 @@ public class MedListActivity extends FragmentActivity implements
 			// res/values-sw600dp). If this view is present, then the
 			// activity should be in two-pane mode.
 			mTwoPane = true;
+			
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
@@ -63,21 +62,33 @@ public class MedListActivity extends FragmentActivity implements
 			listFragment.setActivateOnItemClick(true);
 			
 		}
+
+
+		// TODO: If exposing deep links into your app, handle intents here.
+	}
+	
+	public void initializeButtons()
+	{
+		//initializing buttons
 		
-		Button snooze=(Button) findViewById(R.id.SnoozeButton);
+		snooze=(Button) findViewById(R.id.SnoozeButton);
+		notes=(Button) findViewById(R.id.NotesButton);
+		calendar=(Button) findViewById(R.id.CalendarButton);
+		call=(Button) findViewById(R.id.CallButton);
+		extra=(Button) findViewById(R.id.ExtraButton);
+		settings=(Button) findViewById(R.id.SettingsButton);
+		
+		//settings backgrounds
+		
 		snooze.setBackgroundResource(R.drawable.snooze);
-		Button notes=(Button) findViewById(R.id.NotesButton);
 		notes.setBackgroundResource(R.drawable.notes);
-		Button calendar=(Button) findViewById(R.id.CalendarButton);
 		calendar.setBackgroundResource(R.drawable.calendar);
-		Button call=(Button) findViewById(R.id.CallButton);
 		call.setBackgroundResource(R.drawable.phone);
-		Button extra=(Button) findViewById(R.id.ExtraButton);
 		extra.setBackgroundResource(R.drawable.extra);
-		
-		
-		Button settings=(Button) findViewById(R.id.SettingsButton);
 		settings.setBackgroundResource(R.drawable.settings);
+		
+		
+		
 		settings.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -94,10 +105,7 @@ public class MedListActivity extends FragmentActivity implements
 			}
 			
 		});
-
-		// TODO: If exposing deep links into your app, handle intents here.
 	}
-
 	/**
 	 * Callback method from {@link MedListFragment.Callbacks} indicating that
 	 * the item with the given ID was selected.
@@ -114,6 +122,7 @@ public class MedListActivity extends FragmentActivity implements
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.med_detail_container, fragment).commit();
+			
 
 		} else {
 			// In single-pane mode, simply start the detail activity

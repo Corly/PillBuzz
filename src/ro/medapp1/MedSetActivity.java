@@ -1,6 +1,7 @@
 package ro.medapp1;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -92,7 +93,17 @@ public class MedSetActivity extends PreferenceActivity {
 						.getDefaultSharedPreferences(getApplicationContext());
 				//get the details about the medicine
 				String name = details.getString("name", "No Name");
+				if(name.equals(R.string.default_med_name)) 
+				{
+					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				String description = details.getString("description", "No Description");
+				if(description.equals(R.string.default_med_description)) 
+				{
+					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				String administration = details.getString("administration", "No Administration");
 				int dosage = details.getInt("dosage", -1);
 				
@@ -115,37 +126,39 @@ public class MedSetActivity extends PreferenceActivity {
 				int stopDateDay = -1;
 				int stopDateMonth = -1;
 				int stopDateYear = -1;
+				
 				if (!interval.equals("")) {
 					timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
 				}
 				
-				if (!startTime.equals("")) {
+				if (!startTime.equals("No start time")) {
 					String[] pieces = startTime.split(":");
 					startTimeHour = Integer.parseInt(pieces[0]);
 					startTimeMinute = Integer.parseInt(pieces[1]);
 				}
 				
-				if (!startDate.equals("")) {
+				if (!startDate.equals("No start date")) {
 					String[] pieces = startDate.split("/");
 					startDateDay = Integer.parseInt(pieces[0]);
 					startDateMonth = Integer.parseInt(pieces[1]);
 					startDateYear = Integer.parseInt(pieces[2]);
 				}
 				
-				if (!stopDate.equals("")) {
+				if (!stopDate.equals("No stop date")) {
 					String[] pieces = stopDate.split("/");
 					stopDateDay = Integer.parseInt(pieces[0]);
 					stopDateMonth = Integer.parseInt(pieces[1]);
 					stopDateYear = Integer.parseInt(pieces[2]);
 				}
 				
+				AtomicInteger atomicInteger = new AtomicInteger();
 				Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
 						startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
-						stopDateDay, stopDateMonth, stopDateYear);
+						stopDateDay, stopDateMonth, stopDateYear, atomicInteger.getAndIncrement());
 				
 				//ar trebui adaugat medicamentul cu addMedToList care seteaza si alarma.
 				//dar momentan pentru test tinem asa.
-				MedVector.getInstance().getList().add(medicine);
+				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
 				
 				finish();
 				

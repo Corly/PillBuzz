@@ -8,7 +8,7 @@
 
         <EditTextPreference
             android:capitalize="words"
-            android:defaultValue="add Name"
+            android:defaultValue="@string/default_med_name"
             android:inputType="textCapWords"
             android:key="name"
             android:maxLines="1"
@@ -18,7 +18,7 @@
 
         <EditTextPreference
             android:capitalize="words"
-            android:defaultValue="add description"
+            android:defaultValue="@string/default_med_description"
             android:inputType="textCapWords"
             android:key="description"
             android:maxLines="1"

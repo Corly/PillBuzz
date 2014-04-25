@@ -53,6 +53,7 @@ public class MedSetFragment extends ListFragment{
 		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames);
 		setListAdapter(adapter);
 		
+		
 		}
 	}
 	
