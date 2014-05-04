@@ -26,7 +26,7 @@ public class Alarm extends BroadcastReceiver {
 		Date date = new Date();
 		date = new Date(date.getTime() + interval * 3600 * 1000);
 		Log.d("Debug", date.getYear() + " an");
-		if (date.getYear() > endYear) {
+		if (date.getYear() + 1900 > endYear) {
 			cancelIntent(context, id, intent);
 		} else if (date.getYear() + 1900 == endYear ) {
 			if (date.getMonth() > endMonth) {
