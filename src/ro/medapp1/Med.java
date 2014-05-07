@@ -5,9 +5,7 @@ import android.content.Intent;
 
 public class Med {
 	private static Integer idCounter=0;
-	@com.google.gson.annotations.SerializedName("id")
 	private String id;
-	@com.google.gson.annotations.SerializedName("name")
 	private String name;
 	private String administrationMethod;
 	private String description;
@@ -21,6 +19,11 @@ public class Med {
 	private int startDateDay;
 	private int startDateMonth;
 	private int startDateYear;
+	private int nextDoseHour;
+	private int nextDoseMinute;
+	private int nextDoseDay;
+	private int nextDoseMonth;
+	private int nextDoseYear;
 	private int endDateDay;
 	private int endDateMonth;
 	private int endDateYear;
@@ -32,11 +35,11 @@ public class Med {
 	public Med(String name, String description, String administration,
 			int dosage, String unit, int interval, int startTimeHour,
 			int startTimeMinute, int startDateDay, int startDateMonth,
-			int startDateYear, int endDateDay, int endDateMonth, 
-			int endDateYear, int intentID) {
-	
+			int startDateYear, int nextDoseHour, int nextDoseMinute,
+			int nextDoseDay, int nextDoseMonth, int nextDoseYear,
+			int endDateDay, int endDateMonth, int endDateYear, int intentID) {
+
 		this.id=(idCounter++).toString();
-	
 		this.name = name;
 		this.description = description;
 		this.administrationMethod = administration;
@@ -55,6 +58,32 @@ public class Med {
 		
 		this.firstDoseHour = startTimeHour;
 		this.firstDoseMinute = startTimeMinute;
+		
+		this.nextDoseHour = nextDoseHour; 
+		this.nextDoseMinute = nextDoseMinute;
+		this.nextDoseDay = nextDoseDay;
+		this.nextDoseMonth = nextDoseMonth; 
+		this.nextDoseYear = nextDoseYear;
+	}
+	
+	public int getNextDoseDay() {
+		return nextDoseDay;
+	}
+	
+	public int getNextDoseHour() {
+		return nextDoseHour;
+	}
+	
+	public int getNextDoseMinute() {
+		return nextDoseMinute;
+	}
+	
+	public int getNextDoseMonth() {
+		return nextDoseMonth;
+	}
+	
+	public int getNextDoseYear() {
+		return nextDoseYear;
 	}
 
 	public int getInterval() {
@@ -120,6 +149,26 @@ public class Med {
 	
 	public Intent getAlarmIntent() {
 		return alarmIntent;
+	}
+	
+	public void setNextDoseDay(int nextDoseDay) {
+		this.nextDoseDay = nextDoseDay;
+	}
+	
+	public void setNextDoseHour(int nextDoseHour) {
+		this.nextDoseHour = nextDoseHour;
+	}
+	
+	public void setNextDoseMinute(int nextDoseMinute) {
+		this.nextDoseMinute = nextDoseMinute;
+	}
+	
+	public void setNextDoseMonth(int nextDoseMonth) {
+		this.nextDoseMonth = nextDoseMonth;
+	}
+	
+	public void setNextDoseYear(int nextDoseYear) {
+		this.nextDoseYear = nextDoseYear;
 	}
 	
 	public void setInterval(int interval) {

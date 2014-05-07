@@ -51,12 +51,12 @@ public class MedVector {
 		Calendar calNow = Calendar.getInstance();
 		Calendar calSet = (Calendar) calNow.clone();
 
-		int hour = med.getFirstDoseHour();
-		int minute = med.getFirstDoseMinute();
+		int hour = med.getNextDoseHour();
+		int minute = med.getNextDoseMinute();
 		int interval = med.getInterval();
-		int startYear = med.getStartDateYear();
-		int startMonth = med.getStartDateMonth();
-		int startDay = med.getStartDateDay();
+		int startYear = med.getNextDoseYear();
+		int startMonth = med.getNextDoseMonth();
+		int startDay = med.getNextDoseDay();
 		int stopYear = med.getEndDateYear();
 		int stopMonth = med.getEndDateMonth();
 		int stopDay = med.getEndDateDay();
@@ -70,63 +70,14 @@ public class MedVector {
 					Toast.LENGTH_LONG).show();
 		} 
 		else {
-			Date startDate = new Date(startYear - 1900, startMonth, startDay, hour, minute);
-			Date endDate = new Date(stopYear - 1900, stopMonth, stopDay + 1, 0, 0);
+			Date nextDate = new Date(startYear - 1900, startMonth, startDay, hour, minute);
 			
-			if (startDate.after(endDate)) {
-				Toast.makeText(context, "Alarm couldn't be set. Start date after stop date.",
-						Toast.LENGTH_LONG).show();
-			}
-			else {
-				Date currentDate = new Date();
-				/*while (startDate.before(endDate)) {
-					if (startDate.after(currentDate)) {
-						Log.d("Debug", startDate.toString());
-						
-						Log.d("Debug","Aici se seteaza mai multe: " + startDate.getHours() + " " + startDate.getMinutes()
-								+ " " + startDate.getDate() + " " + startDate.getMonth() + " " + startDate.getYear());
-						calSet.setTimeInMillis(System.currentTimeMillis());
-						Log.d("Debug", calSet.toString());
-						calSet.set(Calendar.DATE, startDate.getDate());
-						//calSet.set(Calendar.MONTH, startDate.getMonth());
-						//calSet.set(Calendar.YEAR, startDate.getYear());
-						calSet.set(Calendar.HOUR_OF_DAY, startDate.getHours());
-						calSet.set(Calendar.MINUTE, startDate.getMinutes());
-						calSet.set(Calendar.SECOND, 0);
-						calSet.set(Calendar.MILLISECOND, 0);
-						
-						//calSet.getTimeInMillis();
-						
-						calSet.setTime(startDate);
-						Log.d("Debug", calSet.toString());
-						
-						Log.d("Debug", "Shalala calendar " + calSet.get(Calendar.DAY_OF_MONTH) + " " +
-								calSet.get(Calendar.HOUR_OF_DAY) + " " + calSet.get(Calendar.MINUTE) + " " + 
-								calSet.get(Calendar.MONTH));
-						Log.d("Debug", "cal set time in millis " + calSet.getTimeInMillis());
-						//med.addPendingIntentAlarm(setAlarm(calSet, context, med));
-						setRepeatingAlarm(calSet, context, interval, med);
-					}
-					startDate = new Date(startDate.getTime() + interval * HOUR);
-				}*/
-				while (startDate.before(currentDate)) {
-					startDate = new Date(startDate.getTime() + interval * HOUR);
-				}
-				
-				calSet.setTimeInMillis(System.currentTimeMillis());
-				calSet.setTime(startDate);
-				Log.d("Debug", calSet.toString());
-				setRepeatingAlarm(calSet, context, interval, med);
-			}
+			calSet.setTimeInMillis(System.currentTimeMillis());
+			calSet.setTime(nextDate);
+			Log.d("Debug", calSet.toString());
+			setRepeatingAlarm(calSet, context, interval, med);
 		}
 		
-		//Log.d("Debug", med.getFirstDoseHour() + " " + med.getFirstDoseMinute() );
-		/*calSet.set(Calendar.HOUR_OF_DAY, med.getFirstDoseHour());
-		calSet.set(Calendar.MINUTE, med.getFirstDoseMinute());
-		calSet.set(Calendar.SECOND, 0);
-		calSet.set(Calendar.MILLISECOND, 0);
-		med.setAlarmIntent(setAlarm(calSet, context));*/
-
 		return list.add(med);
 	}
 

@@ -1,8 +1,11 @@
 package ro.medapp1;
 
 import java.net.MalformedURLException;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import ro.pillbuzz.data.MedDb;
 
 
 import android.annotation.TargetApi;
@@ -45,6 +48,8 @@ public class MedSetActivity extends PreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
+	private final long HOUR = 3600 * 1000; //hours in miliseconds
+
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -129,6 +134,11 @@ public class MedSetActivity extends PreferenceActivity {
 				int stopDateDay = -1;
 				int stopDateMonth = -1;
 				int stopDateYear = -1;
+				int nextDateHour = -1;
+				int nextDateMinute = -1;
+				int nextDateDay = -1;
+				int nextDateMonth = -1;
+				int nextDateYear = -1;
 				
 				if (!interval.equals("")) {
 					timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
@@ -154,14 +164,51 @@ public class MedSetActivity extends PreferenceActivity {
 					stopDateYear = Integer.parseInt(pieces[2]);
 				}
 				
+				if ( startTimeHour == -1 || startTimeMinute == -1 || timeInterval == -1 ||
+						startDateDay == -1 || startDateMonth == -1 || startDateYear == -1 ||
+						stopDateDay == -1 || stopDateMonth == -1 || stopDateYear == -1 ) {
+					Toast.makeText(getApplicationContext(), "Alarm couldn't be set. You must complete all the time specification.",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				else {
+					Date start = new Date(startDateYear - 1900, startDateMonth, startDateDay, 
+							startTimeHour, startTimeMinute);
+					Date end = new Date(stopDateYear - 1900, stopDateMonth, stopDateDay + 1, 0, 0);
+					
+					if (start.after(end)) {
+						Toast.makeText(getApplicationContext(), "Alarm couldn't be set. Start date after stop date.",
+								Toast.LENGTH_LONG).show();
+						return;
+					}
+					else {
+						Date currentDate = new Date();
+						Date next = start;
+						
+						while (next.before(currentDate)) {
+							next = new Date(next.getTime() + timeInterval * HOUR);
+						}
+						
+						nextDateDay = next.getDate();
+						nextDateMonth = next.getMonth();
+						nextDateYear = next.getYear() + 1900;
+						nextDateHour = next.getHours();
+						nextDateMinute = next.getMinutes();
+					}
+				}
+				
 				AtomicInteger atomicInteger = new AtomicInteger();
 				Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
 						startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
+						nextDateHour, nextDateMinute, nextDateDay, nextDateMonth, nextDateYear,
 						stopDateDay, stopDateMonth, stopDateYear, atomicInteger.getAndIncrement());
 				
 				//ar trebui adaugat medicamentul cu addMedToList care seteaza si alarma.
 				//dar momentan pentru test tinem asa.
 				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
+				MedDb db = new MedDb(getApplicationContext());
+				db.addMed(medicine);
+				db.close();
 				
 		//		MedVector.getInstance().updateServerDatabase(MedSetActivity.this);
 							
