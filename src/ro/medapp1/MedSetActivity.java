@@ -1,9 +1,12 @@
 package ro.medapp1;
 
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -42,12 +45,12 @@ public class MedSetActivity extends PreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+		
 	}
 
 	/**
@@ -93,7 +96,17 @@ public class MedSetActivity extends PreferenceActivity {
 						.getDefaultSharedPreferences(getApplicationContext());
 				//get the details about the medicine
 				String name = details.getString("name", "No Name");
+				if(name.equals(R.string.default_med_name)) 
+				{
+					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				String description = details.getString("description", "No Description");
+				if(description.equals(R.string.default_med_description)) 
+				{
+					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				String administration = details.getString("administration", "No Administration");
 				int dosage = details.getInt("dosage", -1);
 				
@@ -116,24 +129,25 @@ public class MedSetActivity extends PreferenceActivity {
 				int stopDateDay = -1;
 				int stopDateMonth = -1;
 				int stopDateYear = -1;
+				
 				if (!interval.equals("")) {
 					timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
 				}
 				
-				if (!startTime.equals("")) {
+				if (!startTime.equals("No start time")) {
 					String[] pieces = startTime.split(":");
 					startTimeHour = Integer.parseInt(pieces[0]);
 					startTimeMinute = Integer.parseInt(pieces[1]);
 				}
 				
-				if (!startDate.equals("")) {
+				if (!startDate.equals("No start date")) {
 					String[] pieces = startDate.split("/");
 					startDateDay = Integer.parseInt(pieces[0]);
 					startDateMonth = Integer.parseInt(pieces[1]);
 					startDateYear = Integer.parseInt(pieces[2]);
 				}
 				
-				if (!stopDate.equals("")) {
+				if (!stopDate.equals("No stop date")) {
 					String[] pieces = stopDate.split("/");
 					stopDateDay = Integer.parseInt(pieces[0]);
 					stopDateMonth = Integer.parseInt(pieces[1]);
@@ -149,6 +163,8 @@ public class MedSetActivity extends PreferenceActivity {
 				//dar momentan pentru test tinem asa.
 				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
 				
+		//		MedVector.getInstance().updateServerDatabase(MedSetActivity.this);
+							
 				finish();
 				
 				//Toast.makeText(getApplicationContext(), timeInterval + "", Toast.LENGTH_SHORT).show();
@@ -157,6 +173,18 @@ public class MedSetActivity extends PreferenceActivity {
 		
 	}
 
+	private void createAndShowDialog(Exception exception, String title, Context context) {
+		Throwable ex = exception;
+		if(exception.getCause() != null){
+			ex = exception.getCause();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+		builder.setMessage(ex.getMessage());
+		builder.setTitle(title);
+		builder.create().show();
+
+	}
 	/** {@inheritDoc} */
 	@Override
 	public boolean onIsMultiPane() {

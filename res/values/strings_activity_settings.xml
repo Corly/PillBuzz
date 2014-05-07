@@ -12,6 +12,8 @@
     
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
 
+    <string name="default_med_name">Add name</string>
+    <string name="default_med_description">Add description</string>
     <string-array name="pref_example_list_titles">
         <item>drops</item>
         <item>pills</item>

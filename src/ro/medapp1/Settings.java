@@ -74,7 +74,7 @@ public class Settings extends Activity {
 				case 0:
 				{
 					MedSetFragment frag=new MedSetFragment();
-					frag.setContext(Settings.this);
+					//frag.setContext(Settings.this);
 					fragment=(Fragment)frag;
 			
 				}break;

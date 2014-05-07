@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 
+
 /**
  * An activity representing a list of Meds. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity

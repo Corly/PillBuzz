@@ -1,6 +1,7 @@
 package ro.medapp1;
 
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -10,12 +11,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
+
+
 
 public class MedSetFragment extends ListFragment{
 	
 	ArrayAdapter adapter;
 	ArrayList<String> medNames = new ArrayList<String>();
-	static Activity context;
+	//static Activity context;
 	
 	public MedSetFragment()
 	{
@@ -25,15 +30,11 @@ public class MedSetFragment extends ListFragment{
 		}
 		medNames.add("+");
 	}
-//	public void update()
-//	{
-//		adapter.add((Object)medNames[medNames.size()-1]);
-//	}
 
-	public void setContext(Activity context)
-	{
-		this.context=context;
-	}
+//	public void setContext(Activity context)
+//	{
+//		this.context=context;
+//	}
 	
 	
 	@Override
@@ -46,13 +47,15 @@ public class MedSetFragment extends ListFragment{
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+	
+	
 		
-		if(context!=null)
+		if(getActivity()!=null)
 		
 		{
-		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames);
+		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, medNames);
 		setListAdapter(adapter);
-		
+
 		}
 	}
 	
@@ -65,7 +68,7 @@ public class MedSetFragment extends ListFragment{
 			medNames.add(m.getName());
 		}
 		medNames.add("+");
-		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, medNames);
+		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, medNames);
 		setListAdapter(adapter);
 		//adapter.notifyDataSetChanged();
 		//adapter.notifyDataSetInvalidated();
@@ -81,7 +84,7 @@ public class MedSetFragment extends ListFragment{
 		Class medClass=null;
 		try {
 			medClass = Class.forName("ro.medapp1.MedSetActivity");
-			Intent medSet=new Intent(context,medClass);
+			Intent medSet=new Intent(getActivity(),medClass);
 			medSet.putExtra("position", position);
 			startActivity(medSet);
 		} catch (ClassNotFoundException e) {
