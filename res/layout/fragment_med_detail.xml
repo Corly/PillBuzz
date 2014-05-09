@@ -1,126 +1,135 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/med_detail244555"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:textIsSelectable="true"
-        tools:context=".MedDetailFragment"
-        >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:textIsSelectable="true"
+    tools:context=".MedDetailFragment" >
 
-    <LinearLayout
-            android:orientation="vertical"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/background"
-            android:padding="20dp"
             android:layout_weight="1"
-            android:gravity="center">
-        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                >
-            <ImageView
+                android:layout_height="wrap_content" >
+<!--
+                <ImageView
+                    android:id="@+id/detail_back_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/detail_back_button" 
                     android:layout_gravity="left"
-                    android:src="@drawable/sageata" 
-                    android:padding="5pt"/>
-            <TextView
+                    android:padding="5pt"
+                    android:src="@drawable/sageata" />
+-->
+                <TextView
                     android:id="@+id/med_name_tv"
+                    style="@style/TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paracetamol" 
-                    android:textSize="40dp"
-                    android:textIsSelectable="false" 
                     android:layout_gravity="center"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" 
-                    android:textStyle="bold" 
                     android:layout_weight="1"
-                    style="@style/TextStyle"
-                    android:gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:textIsSelectable="false"
+                    android:textSize="40dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textIsSelectable="false"
+                android:layout_centerHorizontal="true"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center" android:layout_weight="2">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:textIsSelectable="false" >
+
+                <ImageView
                     android:id="@+id/imageView"
-                    android:layout_weight="2"
-                    android:src="@drawable/clock"
-                    android:layout_gravity="center_vertical|left"/>
-
-            <Space
-                    android:layout_width="20px"
-                    android:layout_height="20px"
-                    android:id="@+id/space" android:layout_weight="1"/>
-            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="08:30"
-                    android:id="@+id/textView"
-                    android:textIsSelectable="false" android:layout_gravity="center|right"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_weight="8"
+                    android:src="@drawable/clock" />
+
+                <Space
+                    android:id="@+id/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <TextView
+                    android:id="@+id/time_tv"
                     style="@style/TextStyle"
-                    android:textSize="40dp"/>
-        </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:layout_weight="8"
+                    android:text="08:30"
+                    android:textIsSelectable="false"
+                    android:textSize="40dp" />
+            </LinearLayout>
 
-        <TextView
-                android:id="@+id/administraion_textview9865"
+            <TextView
+                android:id="@+id/dosage_tv"
+                style="@style/TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="1/2 pill"
+                android:textIsSelectable="false"
+                android:textSize="30dp" />
 
-                android:textIsSelectable="false" android:layout_gravity="center"
-                style="@style/TextStyle" android:gravity="center" android:layout_weight="1"/>
-
-        <TextView
-                android:id="@+id/description_textview0877"
+            <TextView
+                android:id="@+id/description_tv"
+                style="@style/TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextStyle"
-                android:textSize="30dp"
-                android:text="High blood pressure"
-                android:textIsSelectable="false" android:layout_gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp" android:layout_weight="1"/>
-        <!-- *******************************************************************************************
-        **********************************am hardcodat marimea pozei ca sa arate ok pe tableta**********
-        **********************************stiu. e urat. imi cer scuze. voi schimba  ********************-->
-        
-        
-        <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:id="@+id/imageView1" 
-                android:layout_gravity="center" 
-                android:layout_weight="3"
-                android:src="@drawable/photo"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="To be taken with a glass of watter before breakfast."
-                android:id="@+id/textView1" android:layout_weight="4" android:gravity="center"
-                style="@style/TextStyle"
-				android:paddingLeft="5pt" android:paddingRight="5pt"
-                android:paddingBottom="5pt"/>
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5pt"
-                android:id="@+id/arrow" android:gravity="center|center_horizontal"
-                android:src="@drawable/more" android:layout_gravity="center"/>
-    </LinearLayout>
+                android:text="High blood pressure"
+                android:textIsSelectable="false"
+                android:textSize="30dp" />
 
+
+            <TextView
+                android:id="@+id/administration_tv"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:paddingBottom="5pt"
+                android:paddingLeft="5pt"
+                android:paddingRight="5pt"
+                android:text="To be taken with a glass of watter before breakfast." />
+<!-- 
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|center_horizontal"
+                android:padding="5pt"
+                android:src="@drawable/more" />
+   -->
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

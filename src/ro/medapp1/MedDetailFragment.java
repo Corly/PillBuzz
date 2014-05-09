@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -27,14 +28,6 @@ public class MedDetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
-		
-//		if (getArguments().containsKey(ARG_ITEM_ID)) {
-//			// Load the dummy content specified by the fragment
-//			// arguments. In a real-world scenario, use a Loader
-//			// to load content from a content provider.
-//			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
-//					ARG_ITEM_ID));
 	}
 
 	@Override
@@ -43,10 +36,23 @@ public class MedDetailFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_med_detail,
 				container, false);
 
-	
-		// Show the dummy content as text in a TextView.
+		TextView name =(TextView)rootView .findViewById(R.id.med_name_tv);
+		TextView time=(TextView)rootView.findViewById(R.id.time_tv);
+		TextView dosage=(TextView)rootView.findViewById(R.id.dosage_tv);
+		TextView description=(TextView)rootView.findViewById(R.id.description_tv);
+		TextView administration=(TextView)rootView.findViewById(R.id.administration_tv);
 		
-
+		name.setText(getArguments().getString("name"));
+		int hours,minutes;
+		hours=getArguments().getInt("hours");
+		minutes=getArguments().getInt("minutes");
+		if(minutes<10)
+			time.setText(hours+" : 0"+minutes);
+		else
+			time.setText(hours+" : "+minutes);
+		dosage.setText(getArguments().getInt("dosage")+"  "+getArguments().getString("unit"));
+		description.setText(getArguments().getString("description"));
+		administration.setText(getArguments().getString("administration"));
 		return rootView;
 	}
 }

@@ -72,9 +72,9 @@ public class MedDetailActivity extends FragmentActivity {
 		if (savedInstanceState == null) {
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
-			Bundle arguments = new Bundle();
-			arguments.putString(MedDetailFragment.ARG_ITEM_ID, getIntent()
-					.getStringExtra(MedDetailFragment.ARG_ITEM_ID));
+			Bundle arguments;
+			Intent myIntent=getIntent();
+			arguments=myIntent.getExtras().getBundle("arguments");
 			MedDetailFragment fragment = new MedDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()

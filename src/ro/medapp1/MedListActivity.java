@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -28,7 +29,7 @@ import android.widget.Button;
 public class MedListActivity extends FragmentActivity implements
 		MedListFragment.Callbacks {
 	
-	
+	private MedListFragment listFragment;
 	public static Activity context=null;
 	public static float text_size;
 	boolean mTwoPane;
@@ -45,8 +46,9 @@ public class MedListActivity extends FragmentActivity implements
 		//setting the dimention of the text
 		Display display=getWindowManager().getDefaultDisplay();
 		text_size=display.getHeight()/30;
-		 initializeButtons();
-
+		 initializeButtons();			
+			listFragment=((MedListFragment) getSupportFragmentManager().findFragmentById(
+					R.id.med_list));
 		if (findViewById(R.id.med_detail_container) != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and
@@ -57,13 +59,10 @@ public class MedListActivity extends FragmentActivity implements
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			
-			MedListFragment listFragment=((MedListFragment) getSupportFragmentManager().findFragmentById(
-					R.id.med_list));
 			listFragment.setActivateOnItemClick(true);
 			
 		}
-
+	
 
 		// TODO: If exposing deep links into your app, handle intents here.
 	}
@@ -113,23 +112,35 @@ public class MedListActivity extends FragmentActivity implements
 	 */
 	@Override
 	public void onItemSelected(String id) {
+		Bundle arguments = new Bundle();
+		arguments.putString(MedDetailFragment.ARG_ITEM_ID, id);
+		MedVector meds=MedVector.getInstance();
+		int position =Integer.parseInt(listFragment.getModels().get(Integer.parseInt(id)).getCounter());
+		arguments.putString("name", meds.getList().get(position).getName());
+		arguments.putInt("hours", listFragment.getModels().get(Integer.parseInt(id)).getHour());
+		arguments.putInt("minutes", listFragment.getModels().get(Integer.parseInt(id)).getMinutes());
+		arguments.putInt("dosage", meds.getList().get(position).getDosage());
+		arguments.putString("unit", meds.getList().get(position).getUnit());
+		arguments.putString("description", meds.getList().get(position).getDescription());
+		arguments.putString("administration", meds.getList().get(position).getAdministrationMethod());
+		
+		
+		
 		if (mTwoPane) {
 			// In two-pane mode, show the detail view in this activity by
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
-			Bundle arguments = new Bundle();
-			arguments.putString(MedDetailFragment.ARG_ITEM_ID, id);
 			MedDetailFragment fragment = new MedDetailFragment();
+
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.med_detail_container, fragment).commit();
-			
-
 		} else {
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, MedDetailActivity.class);
 			detailIntent.putExtra(MedDetailFragment.ARG_ITEM_ID, id);
+			detailIntent.putExtra("arguments",arguments);
 			startActivity(detailIntent);
 		}
 	}

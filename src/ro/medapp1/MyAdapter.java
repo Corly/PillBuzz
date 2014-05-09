@@ -42,9 +42,18 @@ public class MyAdapter extends ArrayAdapter<Model> {
 			rowView = inflater.inflate(R.xml.target_item, parent, false);
 
 			// 3. Get icon,title & counter views from the rowView
+			TextView hourView = (TextView) rowView.findViewById(R.id.item_hour);
 			TextView titleView = (TextView) rowView.findViewById(R.id.item_title);
+			
 
 			// 4. Set the text for textView
+			int minutes=modelsArrayList.get(position).getMinutes();
+			int hours=modelsArrayList.get(position).getHour();
+			System.out.println(minutes);
+			if(minutes<10) 
+				hourView.setText(hours+" : 0"+minutes+"  ");
+			else
+				hourView.setText(hours+" : "+minutes+"  ");
 			titleView.setText(modelsArrayList.get(position).getTitle());
 
 			rowView.setOnClickListener(new OnClickListener(){
