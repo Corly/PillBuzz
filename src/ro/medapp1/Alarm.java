@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ public class Alarm extends BroadcastReceiver {
 		int endYear = intent.getIntExtra("endYear", -1);
 		int interval = intent.getIntExtra("interval", -1);
 		int id = intent.getIntExtra("id", -1);
+		Bundle arguments=intent.getExtras().getBundle("arguments");
+		
 		
 		Date date = new Date();
 		date = new Date(date.getTime() + interval * 3600 * 1000);
@@ -37,10 +40,10 @@ public class Alarm extends BroadcastReceiver {
 				}
 			}
 		}
-		
 		intent=new Intent(context,MedDetailActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra("fromAlarm", true);
+		intent.putExtra("arguments", arguments);
 		context.startActivity(intent);
 	}
 	

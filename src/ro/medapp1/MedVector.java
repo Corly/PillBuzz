@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -100,6 +101,17 @@ public class MedVector {
 	{
 
 		Intent intent = new Intent(context, Alarm.class);
+		
+//		Bundle arguments = new Bundle();
+//		arguments.putString("name", medicine.getName());
+//		arguments.putInt("hours",cal.getTime().getHours());
+//		arguments.putInt("minutes",cal.getTime().getMinutes());
+//		arguments.putInt("dosage", medicine.getDosage());
+//		arguments.putString("unit", medicine.getUnit());
+//		arguments.putString("description", medicine.getDescription());
+//		arguments.putString("administration", medicine.getAdministrationMethod());
+//		intent.putExtra("arguments",arguments);
+		
 		medicine.setAlarmIntent(intent);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
 				context, counter++, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -120,7 +132,15 @@ public class MedVector {
 		intent.putExtra("endYear", medicine.getEndDateYear());
 		intent.putExtra("interval", interval);
 		intent.putExtra("id", id);
-		
+		Bundle arguments = new Bundle();
+		arguments.putString("name", medicine.getName());
+		arguments.putInt("hours",cal.getTime().getHours());
+		arguments.putInt("minutes",cal.getTime().getMinutes());
+		arguments.putInt("dosage", medicine.getDosage());
+		arguments.putString("unit", medicine.getUnit());
+		arguments.putString("description", medicine.getDescription());
+		arguments.putString("administration", medicine.getAdministrationMethod());
+		intent.putExtra("arguments",arguments);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 
 				id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 		//medicine.setAlarmIntent(pendingIntent);
