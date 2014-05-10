@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
 
 /**
  * An activity representing a single Med detail screen. This activity is only
@@ -24,6 +23,7 @@ import android.widget.Button;
 public class MedDetailActivity extends FragmentActivity {
 	Vibrator v;
 	MediaPlayer mediaPlayer;
+	public static boolean isSnooze = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +39,22 @@ public class MedDetailActivity extends FragmentActivity {
     		// Vibrate for 500 milliseconds
     		long[] ceva = { 500, 1000 };
     		v.vibrate(ceva, 0);
-    		mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
-    		mediaPlayer.start();
+    		if (!isSnooze) {
+    			mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+    			mediaPlayer.start();
+    		}
     		
     		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setTitle("Remainder");
     		builder.setMessage("You have to take some pills");
     		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-    	
     		
     			@Override
     			public void onClick(DialogInterface dialog, int which) {
     				v.cancel();
-    				mediaPlayer.stop();
+    				if (!isSnooze) {
+    					mediaPlayer.stop();
+    				}
     			}
     		});
     		builder.create().show();
