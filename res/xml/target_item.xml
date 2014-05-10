@@ -2,17 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/titlebar"
+    >
 
     <!--
     <ImageButton
         android:id="@+id/takenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="20dp"
         android:background="@color/white"
-        android:padding="5dp"
+
         android:src="@drawable/checked"
      ></ImageButton>
+<<<<<<< HEAD
     -->
     <TextView
         
@@ -32,5 +38,16 @@
         android:layout_gravity="center_vertical"
         android:textColor="@color/darkblue"
         android:textSize="30dp" />
+=======
+        <!-- title -->
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+
+            android:textColor="@color/darkblue" />
+>>>>>>> 919f67007ae5837334b2d3176f9514ed804e5375
 
 </LinearLayout>

@@ -104,7 +104,6 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="High blood pressure"
                 android:textIsSelectable="false"
                 android:textSize="30dp" />
 
@@ -118,8 +117,7 @@
                 android:gravity="center"
                 android:paddingBottom="5pt"
                 android:paddingLeft="5pt"
-                android:paddingRight="5pt"
-                android:text="To be taken with a glass of watter before breakfast." />
+                android:paddingRight="5pt" />
 <!-- 
             <ImageView
                 android:id="@+id/arrow"
