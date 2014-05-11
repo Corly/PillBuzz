@@ -1,17 +1,15 @@
 package ro.medapp1;
 
-import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import ro.pillbuzz.data.MedDb;
-
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -49,13 +47,82 @@ public class MedSetActivity extends PreferenceActivity {
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 	private final long HOUR = 3600 * 1000; //hours in miliseconds
+	private boolean UPDATE = false;
+	private Med medForUpdate;
+	private int positionInMedVector;
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-
-		setupSimplePreferencesScreen();
 		
+		int position = getIntent().getIntExtra("position", -1);
+		if (position == -1) {
+			finish();
+			return;
+		}
+
+		if (position == MedVector.getInstance().getList().size()) {
+			setPreferencesToDefault();
+			setupSimplePreferencesScreen();
+			
+			ListPreference listPreferenceUnit = (ListPreference) findPreference("unit");
+			listPreferenceUnit.setValueIndex(0);
+			ListPreference listPreferenceInterval = (ListPreference) findPreference("interval");
+			listPreferenceInterval.setValueIndex(0);
+			
+			UPDATE = false;
+		}
+		else {
+			Med medicine = MedVector.getInstance().getList().get(position);
+			setPreferencesOfMed(medicine);
+			setupSimplePreferencesScreen();
+
+			ListPreference listPreferenceUnit = (ListPreference) findPreference("unit");
+			listPreferenceUnit.setValue(medicine.getUnit());
+			ListPreference listPreferenceInterval = (ListPreference) findPreference("interval");
+			listPreferenceInterval.setValue(medicine.getInterval() + "h");
+			
+			Button update = (Button) findViewById(R.id.button_save_med);
+			update.setText("Update");
+			
+			UPDATE = true;
+			medForUpdate = medicine;
+		}
+		
+		positionInMedVector = position;
+	}
+	
+	private void setPreferencesToDefault() {
+		SharedPreferences details = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		Editor editor = details.edit();
+		editor.putString("name", "Add name");
+		editor.putString("description", "Add description");
+		editor.putString("administration", "");
+		editor.putInt	("dosage", -1);
+		editor.putString("startdate", "");
+		editor.putString("starttime", "00:00");
+		editor.putString("stopdate", "");
+		editor.commit();
+	}
+	
+	private void setPreferencesOfMed(Med medicine) {
+		SharedPreferences details = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		Editor editor = details.edit();
+		editor.putString("name", medicine.getName());
+		editor.putString("description", medicine.getDescription());
+		editor.putString("administration", medicine.getAdministrationMethod());
+		editor.putInt	("dosage", medicine.getDosage());
+		editor.putString("startdate", medicine.getStartDateDay() + "/" +
+				medicine.getStartDateMonth() + "/" +
+				medicine.getStartDateYear());
+		editor.putString("stopdate", medicine.getEndDateDay() + "/" +
+				medicine.getEndDateMonth() + "/" +
+				medicine.getEndDateYear());
+		editor.putString("starttime", medicine.getFirstDoseHour() + ":" + 
+				(medicine.getFirstDoseMinute() < 10 ? "0" : "") + medicine.getFirstDoseMinute());
+		editor.commit();
 	}
 
 	/**
@@ -76,8 +143,6 @@ public class MedSetActivity extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.preferences);
 		setContentView(R.layout.settings);
 		
-		//this.addPreferencesFromIntent(new DatepickerPreference(this,null).getIntent());
-		//addPreferencesFromResource(R.layout.datepicker_dialog);
 		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
@@ -91,133 +156,161 @@ public class MedSetActivity extends PreferenceActivity {
 		bindPreferenceSummaryToStringValue(findPreference("starttime"));
 		bindPreferenceSummaryToIntValue(findPreference("dosage"));
 		
-		//Save the medicine
+		//Save the medicine or Update it
 		Button save = (Button) findViewById(R.id.button_save_med);
 		save.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				SharedPreferences details = PreferenceManager
-						.getDefaultSharedPreferences(getApplicationContext());
-				//get the details about the medicine
-				String name = details.getString("name", "No Name");
-				if(name.equals(R.string.default_med_name)) 
-				{
-					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				String description = details.getString("description", "No Description");
-				if(description.equals(R.string.default_med_description)) 
-				{
-					Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				String administration = details.getString("administration", "No Administration");
-				int dosage = details.getInt("dosage", -1);
-				
-				String startDate = details.getString("startdate", "No start date");
-				String stopDate = details.getString("stopdate", "No stop date");
-				String startTime = details.getString("starttime", "No start time");
-				
-				ListPreference listPreferenceUnit = (ListPreference) findPreference("unit");
-				String unit = listPreferenceUnit.getEntry().toString();
-				
-				ListPreference listPreferenceInterval = (ListPreference) findPreference("interval");
-				String interval = listPreferenceInterval.getEntry().toString();
-				
-				int timeInterval = -1;
-				int startTimeHour = -1;
-				int startTimeMinute = -1;
-				int startDateDay = -1;
-				int startDateMonth = -1;
-				int startDateYear = -1;
-				int stopDateDay = -1;
-				int stopDateMonth = -1;
-				int stopDateYear = -1;
-				int nextDateHour = -1;
-				int nextDateMinute = -1;
-				int nextDateDay = -1;
-				int nextDateMonth = -1;
-				int nextDateYear = -1;
-				
-				if (!interval.equals("")) {
-					timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
-				}
-				
-				if (!startTime.equals("No start time")) {
-					String[] pieces = startTime.split(":");
-					startTimeHour = Integer.parseInt(pieces[0]);
-					startTimeMinute = Integer.parseInt(pieces[1]);
-				}
-				
-				if (!startDate.equals("No start date")) {
-					String[] pieces = startDate.split("/");
-					startDateDay = Integer.parseInt(pieces[0]);
-					startDateMonth = Integer.parseInt(pieces[1]);
-					startDateYear = Integer.parseInt(pieces[2]);
-				}
-				
-				if (!stopDate.equals("No stop date")) {
-					String[] pieces = stopDate.split("/");
-					stopDateDay = Integer.parseInt(pieces[0]);
-					stopDateMonth = Integer.parseInt(pieces[1]);
-					stopDateYear = Integer.parseInt(pieces[2]);
-				}
-				
-				if ( startTimeHour == -1 || startTimeMinute == -1 || timeInterval == -1 ||
-						startDateDay == -1 || startDateMonth == -1 || startDateYear == -1 ||
-						stopDateDay == -1 || stopDateMonth == -1 || stopDateYear == -1 ) {
-					Toast.makeText(getApplicationContext(), "Alarm couldn't be set. You must complete all the time specification.",
-							Toast.LENGTH_LONG).show();
-					return;
-				}
-				else {
-					Date start = new Date(startDateYear - 1900, startDateMonth, startDateDay, 
-							startTimeHour, startTimeMinute);
-					Date end = new Date(stopDateYear - 1900, stopDateMonth, stopDateDay + 1, 0, 0);
-					
-					if (start.after(end)) {
-						Toast.makeText(getApplicationContext(), "Alarm couldn't be set. Start date after stop date.",
-								Toast.LENGTH_LONG).show();
-						return;
-					}
-					else {
-						Date currentDate = new Date();
-						Date next = start;
-						
-						while (next.before(currentDate)) {
-							next = new Date(next.getTime() + timeInterval * HOUR);
-						}
-						
-						nextDateDay = next.getDate();
-						nextDateMonth = next.getMonth();
-						nextDateYear = next.getYear() + 1900;
-						nextDateHour = next.getHours();
-						nextDateMinute = next.getMinutes();
-					}
-				}
-				
-				AtomicInteger atomicInteger = new AtomicInteger();
-				Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
-						startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
-						nextDateHour, nextDateMinute, nextDateDay, nextDateMonth, nextDateYear,
-						stopDateDay, stopDateMonth, stopDateYear, atomicInteger.getAndIncrement());
-				
-				//ar trebui adaugat medicamentul cu addMedToList care seteaza si alarma.
-				//dar momentan pentru test tinem asa.
-				MedVector.getInstance().addMedToList(medicine, getApplicationContext());
-				MedDb db = new MedDb(getApplicationContext());
-				db.addMed(medicine);
-				db.close();
-				
-		//		MedVector.getInstance().updateServerDatabase(MedSetActivity.this);
-							
-				finish();
-				
-				//Toast.makeText(getApplicationContext(), timeInterval + "", Toast.LENGTH_SHORT).show();
+				setButton();
 			}
 		});
+	}
+	
+
+	@SuppressWarnings("deprecation")
+	private void setButton() {
+		SharedPreferences details = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		//get the details about the medicine
+		String name = details.getString("name", "No Name");
+		if(name.equals(R.string.default_med_name)) 
+		{
+			Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		String description = details.getString("description", "No Description");
+		if(description.equals(R.string.default_med_description)) 
+		{
+			Toast.makeText(getApplicationContext(), "Please add a name for this medicine", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		String administration = details.getString("administration", "No Administration");
+		int dosage = details.getInt("dosage", -1);
 		
+		String startDate = details.getString("startdate", "No start date");
+		String stopDate = details.getString("stopdate", "No stop date");
+		String startTime = details.getString("starttime", "No start time");
+		
+		ListPreference listPreferenceUnit = (ListPreference) findPreference("unit");
+		String unit;
+		if (listPreferenceUnit == null || listPreferenceUnit.getEntry() == null) {
+			if (UPDATE) {
+				unit = medForUpdate.getUnit();
+			}
+			else {
+				unit = "";
+			}
+		}
+		else {
+			unit = listPreferenceUnit.getEntry().toString();
+		}
+		
+		ListPreference listPreferenceInterval = (ListPreference) findPreference("interval");
+		String interval;
+		if (listPreferenceInterval == null || listPreferenceInterval.getEntry() == null) {
+			if (UPDATE) {
+				interval = medForUpdate.getInterval() + "h";
+			}
+			else {
+				Toast.makeText(getApplicationContext(), "Please set an interval", Toast.LENGTH_SHORT).show();
+				return;
+			}
+		}
+		else {
+			interval = listPreferenceInterval.getEntry().toString();
+		}
+		
+		int timeInterval = -1;
+		int startTimeHour = -1;
+		int startTimeMinute = -1;
+		int startDateDay = -1;
+		int startDateMonth = -1;
+		int startDateYear = -1;
+		int stopDateDay = -1;
+		int stopDateMonth = -1;
+		int stopDateYear = -1;
+		int nextDateHour = -1;
+		int nextDateMinute = -1;
+		int nextDateDay = -1;
+		int nextDateMonth = -1;
+		int nextDateYear = -1;
+		
+		if (!interval.equals("")) {
+			timeInterval = Integer.parseInt(interval.substring(0, interval.length() - 1));
+		}
+		
+		if (!startTime.equals("No start time") && !startTime.equals("")) {
+			String[] pieces = startTime.split(":");
+			startTimeHour = Integer.parseInt(pieces[0]);
+			startTimeMinute = Integer.parseInt(pieces[1]);
+		}
+		
+		if (!startDate.equals("No start date") && !startDate.equals("")) {
+			String[] pieces = startDate.split("/");
+			startDateDay = Integer.parseInt(pieces[0]);
+			startDateMonth = Integer.parseInt(pieces[1]);
+			startDateYear = Integer.parseInt(pieces[2]);
+		}
+		
+		if (!stopDate.equals("No stop date") && !stopDate.equals("")) {
+			String[] pieces = stopDate.split("/");
+			stopDateDay = Integer.parseInt(pieces[0]);
+			stopDateMonth = Integer.parseInt(pieces[1]);
+			stopDateYear = Integer.parseInt(pieces[2]);
+		}
+		
+		if ( startTimeHour == -1 || startTimeMinute == -1 || timeInterval == -1 ||
+				startDateDay == -1 || startDateMonth == -1 || startDateYear == -1 ||
+				stopDateDay == -1 || stopDateMonth == -1 || stopDateYear == -1 ) {
+			Toast.makeText(getApplicationContext(), "Alarm couldn't be set. You must complete all the time specification.",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		else {
+			Date start = new Date(startDateYear - 1900, startDateMonth, startDateDay, 
+					startTimeHour, startTimeMinute);
+			Date end = new Date(stopDateYear - 1900, stopDateMonth, stopDateDay + 1, 0, 0);
+			
+			if (start.after(end)) {
+				Toast.makeText(getApplicationContext(), "Alarm couldn't be set. Start date after stop date.",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+			else {
+				Date currentDate = new Date();
+				Date next = start;
+				
+				while (next.before(currentDate)) {
+					next = new Date(next.getTime() + timeInterval * HOUR);
+				}
+				
+				nextDateDay = next.getDate();
+				nextDateMonth = next.getMonth();
+				nextDateYear = next.getYear() + 1900;
+				nextDateHour = next.getHours();
+				nextDateMinute = next.getMinutes();
+			}
+		}
+		
+		AtomicInteger atomicInteger = new AtomicInteger();
+		Med medicine = new Med(name, description, administration, dosage, unit, timeInterval,
+				startTimeHour, startTimeMinute, startDateDay, startDateMonth, startDateYear,
+				nextDateHour, nextDateMinute, nextDateDay, nextDateMonth, nextDateYear,
+				stopDateDay, stopDateMonth, stopDateYear, atomicInteger.getAndIncrement());
+		
+		MedDb db = new MedDb(getApplicationContext());
+		if (UPDATE) {
+			MedVector.getInstance().removeMedFromList(getApplicationContext(), medForUpdate);
+			db.deleteMed(medForUpdate);
+		}
+		MedVector.getInstance().addMedToList(medicine, positionInMedVector, getApplicationContext());
+		db.addMed(medicine);
+		db.close();
+		
+//		MedVector.getInstance().updateServerDatabase(MedSetActivity.this);
+					
+		finish();
 	}
 
 	private void createAndShowDialog(Exception exception, String title, Context context) {

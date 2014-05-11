@@ -76,7 +76,7 @@ package ro.medapp1;
 
 	    @Override
 	    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-	        String time=null;
+	        String time=getPersistedString("00:00");
 
 	        if (restoreValue) {
 	            if (defaultValue==null) {

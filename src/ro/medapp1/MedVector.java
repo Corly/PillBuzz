@@ -1,9 +1,11 @@
 package ro.medapp1;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import ro.pillbuzz.data.MedDb;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -13,13 +15,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
-
-import java.net.MalformedURLException;
 
 
 public class MedVector {
@@ -47,7 +46,7 @@ public class MedVector {
 	}
 
 	@SuppressWarnings({ "deprecation" })
-	public boolean addMedToList(Med med, Context context) {
+	public void addMedToList(Med med, int position, Context context) {
 		//Set the calendar for the alarms
 		Calendar calNow = Calendar.getInstance();
 		Calendar calSet = (Calendar) calNow.clone();
@@ -79,45 +78,33 @@ public class MedVector {
 			setRepeatingAlarm(calSet, context, interval, med);
 		}
 		
-		return list.add(med);
+		list.add(position, med);
 	}
 
 	public void removeMedFromList(Context context, Med med) {
 		for (Med m : list) {
 			if (med.equals(m)) {
-				Alarm.cancelIntent(context, med.getIntentID(), med.getAlarmIntent());
+				Intent intent = new Intent(context, Alarm.class);
+				Alarm.cancelIntent(context, med.getIntentID(), intent);
 				//alarmManager.cancel(m.getAlarmIntent());
 				list.remove(m);
 			}
 		}
 	}
-
-	public void updateMed(Context context, Med med) {
-		removeMedFromList(context, med);
-		addMedToList(med, context);
+	
+	public void setListFromDB(Context context) {
+		MedDb db = new MedDb(context);
+		list = (ArrayList<Med>) db.getAllMeds();
+		db.close();
 	}
 
-	public PendingIntent setAlarm(Calendar cal, Context context, Med medicine)
-	{
-
+	public PendingIntent setAlarm(Calendar cal, Context context, Med medicine) {
 		Intent intent = new Intent(context, Alarm.class);
-		
-//		Bundle arguments = new Bundle();
-//		arguments.putString("name", medicine.getName());
-//		arguments.putInt("hours",cal.getTime().getHours());
-//		arguments.putInt("minutes",cal.getTime().getMinutes());
-//		arguments.putInt("dosage", medicine.getDosage());
-//		arguments.putString("unit", medicine.getUnit());
-//		arguments.putString("description", medicine.getDescription());
-//		arguments.putString("administration", medicine.getAdministrationMethod());
-//		intent.putExtra("arguments",arguments);
 		
 		medicine.setAlarmIntent(intent);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
 				context, counter++, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-		//Log.d("Debug", pendingIntent.toString());
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		//Log.d("Debug", "cal get time " + cal.getTime());
 		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
 				pendingIntent);
 		return pendingIntent;
