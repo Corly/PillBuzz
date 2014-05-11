@@ -239,6 +239,34 @@ public class MedDb extends SQLiteOpenHelper {
 		return meds;
 	}
 	
+	public void deleteMed(Med med) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQueryAlarm = "SELECT * FROM " + AlarmTable.TABLE_NAME + " ta, " +
+				MedTable.TABLE_NAME + " tm, " + RelationTable.TABLE_NAME + " tr WHERE tm." +
+				MedTable.COLUMN_NAME + " = '" + med.getName() + "'" + " AND tm." + MedTable.COLUMN_ID +
+				" = " + "tr." + RelationTable.COLUMN_MEDICINE + " AND ta." + AlarmTable.COLUMN_ID +
+				" = " + "tr." + RelationTable.COLUMN_ALARM;
+		
+		Cursor c = db.rawQuery(selectQueryAlarm, null);
+		if (c != null) {
+			c.moveToFirst();
+		}
+		
+		db.close();
+		deleteAlarm(c.getInt(c.getColumnIndex(AlarmTable.COLUMN_ID)));
+		System.out.println(med.getName());
+		db = this.getReadableDatabase();
+		db.delete(MedTable.TABLE_NAME, MedTable.COLUMN_NAME + "='" + med.getName() + "'", null);
+		db.close();
+	}
+	
+	private void deleteAlarm(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.delete(AlarmTable.TABLE_NAME, AlarmTable.COLUMN_ID + " = ?",
+				new String[] { String.valueOf(id) });
+		db.close();
+	}
+	
 	public void updateMedAlarmIntentId(String name, int intentId) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQueryAlarm = "SELECT * FROM " + AlarmTable.TABLE_NAME + " ta, " +
