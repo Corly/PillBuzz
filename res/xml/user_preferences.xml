@@ -12,6 +12,13 @@
             android:title="Bracelet" />
 
         <EditTextPreference
+            android:capitalize="words"
+            android:inputType="number"
+            android:key="emergencyNo"
+            android:maxLines="10"
+            android:selectAllOnFocus="true"
+            android:title="Emergency Number" />
+        <EditTextPreference
             android:inputType="textPassword"
             android:key="password"
             android:title="Password" />
@@ -24,11 +31,12 @@
             android:persistent="false"
             android:title="Connect" >
             <ro.medapp1.MyDialogPreference
-            android:key="dialog_preference"
-            android:title="Dialog"    />
+                android:key="dialog_preference"
+                android:title="Dialog" />
+
             <Preference
                 android:key="button"
-                android:title="Button"/>
+                android:title="Button" />
         </PreferenceScreen>
 
         <Preference

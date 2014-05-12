@@ -2,13 +2,17 @@ package ro.medapp1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -87,7 +91,21 @@ public class MedListActivity extends FragmentActivity implements
 		extra.setBackgroundResource(R.drawable.extra);
 		settings.setBackgroundResource(R.drawable.settings);
 		
+	call.setOnClickListener(new View.OnClickListener() {
 		
+		@Override
+		public void onClick(View v) {
+			SharedPreferences details = PreferenceManager
+					.getDefaultSharedPreferences(getApplicationContext());
+			String number=details.getString("emergencyNo",null);
+			if(number!=null)
+			{
+				Intent callIntent = new Intent(Intent.ACTION_CALL);
+				callIntent.setData(Uri.parse("tel:"+number));
+				startActivity(callIntent);
+			}
+		}
+	});
 	notes.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

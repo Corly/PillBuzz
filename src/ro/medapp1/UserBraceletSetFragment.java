@@ -4,6 +4,9 @@ package ro.medapp1;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -23,7 +26,6 @@ public class UserBraceletSetFragment  extends PreferenceFragment {
 
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.user_preferences);
+	
 	}
-
-
 }
