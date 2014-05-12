@@ -88,6 +88,40 @@ public class MedListActivity extends FragmentActivity implements
 		settings.setBackgroundResource(R.drawable.settings);
 		
 		
+	notes.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Class sClass=null;
+				try {
+					sClass = Class.forName("ro.medapp1.NotesActivity");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Intent intent=new Intent(MedListActivity.this,sClass);
+				startActivity(intent);
+				
+			}
+		});
+		
+		
+		extra.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Class sClass=null;
+				try {
+					sClass = Class.forName("ro.medapp1.ExtraActivity");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Intent intent=new Intent(MedListActivity.this,sClass);
+				startActivity(intent);
+				
+			}
+		});
 		
 		settings.setOnClickListener(new View.OnClickListener(){
 

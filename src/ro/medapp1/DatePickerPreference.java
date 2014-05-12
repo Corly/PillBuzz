@@ -14,7 +14,7 @@ public class DatePickerPreference extends DialogPreference {
 	public DatePickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         
-        setDialogLayoutResource(R.layout.datepicker_dialog);
+        setDialogLayoutResource(R.xml.datepicker_dialog);
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
         

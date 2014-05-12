@@ -10,13 +10,22 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_med_settings">MedSettings</string>
     <string name="title_activity_alarm">Alarm</string>
-    <string name="hello_world">Hello world!</string>
-    
+    <string name="on">Turn On</string>
+    <string name="off">Turn Off</string>
+    <string name="Visible">Get Visible</string>
+    <string name="List">List Devices</string>
+
     <string-array name="doze_entries">
         <item>pills</item>
         <item>drops</item>
         <item>ml</item>
         <item>mg</item>
     </string-array>
+
+    <string name="title_activity_extra">ExtraActivity</string>
+    <string name="title_activity_notes">NotesActivity</string>
+    <string name="title_activity_connect_bracelet">ConnectBraceletActivity</string>
+    <string name="title_activity_bracelet_connect">BraceletConnectActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

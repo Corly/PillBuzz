@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-
     <PreferenceCategory
         android:key="user_settings"
         android:title="User Settings" >
@@ -11,25 +10,47 @@
         <CheckBoxPreference
             android:key="bracelet_preference"
             android:title="Bracelet" />
-        <EditTextPreference
-    android:key="password"
-    android:title="Password"
-    android:inputType="textPassword" />
-    </PreferenceCategory>
 
-    
+        <EditTextPreference
+            android:inputType="textPassword"
+            android:key="password"
+            android:title="Password" />
+    </PreferenceCategory>
     <PreferenceCategory
-        android:key="user_settings"
-        android:title="User Settings" >
-      <ro.medapp1.NumberPickerPreference
+        android:key="bracelet_settings"
+        android:title="Bracelet Settings" >
+        <PreferenceScreen
+            android:key="button_voicemail_setting_key"
+            android:persistent="false"
+            android:title="Connect" >
+            <ro.medapp1.MyDialogPreference
+            android:key="dialog_preference"
+            android:title="Dialog"    />
+            <Preference
+                android:key="button"
+                android:title="Button"/>
+        </PreferenceScreen>
+
+        <Preference
+            android:key="connect_bracelet"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Connect" >
+            <intent
+                android:targetClass="ro.medapp1.BraceletConnectActivity"
+                android:targetPackage="ro.medapp1" />
+        </Preference>
+
+        <ro.medapp1.NumberPickerPreference
             android:key="delay"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="Delay" />
-      <ro.medapp1.NumberPickerPreference
+        <ro.medapp1.NumberPickerPreference
             android:key="buffer"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
-            android:title="Buffer Time" />     
+            android:title="Buffer Time" />
     </PreferenceCategory>
+
 </PreferenceScreen>
