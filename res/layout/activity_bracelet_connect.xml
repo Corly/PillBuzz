@@ -8,56 +8,68 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BraceletConnectActivity" >
 
- <ScrollView
-      android:id="@+id/scrollView1"
-      android:layout_width="wrap_content"
+   <Button
+      android:id="@+id/button_list_devices"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentTop="true" >
-
-   <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical" >
-   <Button
-      android:id="@+id/button1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="on"
-      android:text="@string/on" />
-
-   <Button
-      android:id="@+id/button2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="visible"
-      android:text="@string/Visible" />
-
-   <Button
-      android:id="@+id/button3"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="list"
       android:text="@string/List" />
+   
+   <LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/button_list_devices" >
+    
+    	<TextView
+        	android:id="@+id/title_paired_devices"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:background="#666"
+        	android:paddingLeft="5dp"
+        	android:text="@string/title_paired_devices"
+        	android:textColor="#fff"
+        	android:visibility="gone" />
+    
+	   <ListView
+	       android:id="@+id/paired_devices"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="1"
+	        />
 
+	    <TextView
+	        android:id="@+id/title_new_devices"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="#666"
+	        android:paddingLeft="5dp"
+	        android:text="@string/title_other_devices"
+	        android:textColor="#fff"
+	        android:visibility="gone" />
+
+	    <ListView
+	        android:id="@+id/new_devices"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	         />
+
+	</LinearLayout>
+   
+   <TextView
+       android:id="@+id/text_connected_info"
+       android:layout_centerInParent="true"
+       android:visibility="gone"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+   
    <Button
-      android:id="@+id/button4"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="off"
-      android:text="@string/off" />
-
-   <ListView
-      android:id="@+id/listView1"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:visibility="visible" >
-
-   </ListView>
-
-   </LinearLayout>
-</ScrollView>
+       android:id="@+id/button_send_data"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:text="@string/send_data"
+       android:visibility="gone" />
+       
 
 </RelativeLayout>
