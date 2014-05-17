@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.Display;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ public class MedListActivity extends FragmentActivity implements
 	private MedListFragment listFragment;
 	public static Activity context=null;
 	public static float text_size;
-	boolean mTwoPane;
+	boolean mTwoPane,silent;
 	Button back, snooze,notes,calendar,call,extra,settings;
 	
 	
@@ -71,6 +72,19 @@ public class MedListActivity extends FragmentActivity implements
 		// TODO: If exposing deep links into your app, handle intents here.
 	}
 	
+	
+	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(MedDetailActivity.isSnooze()==true)
+			snooze.setBackgroundResource(R.drawable.snoozeoff);
+	}
+
+
+
+
 	public void initializeButtons()
 	{
 		//initializing buttons
@@ -91,7 +105,26 @@ public class MedListActivity extends FragmentActivity implements
 		extra.setBackgroundResource(R.drawable.extra);
 		settings.setBackgroundResource(R.drawable.settings);
 		
-	call.setOnClickListener(new View.OnClickListener() {
+		snooze.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+				if(MedDetailActivity.isSnooze())
+				{
+					snooze.setBackgroundResource(R.drawable.snooze);
+					MedDetailActivity.setSnooze(false);
+				}
+				else
+				{
+					MedDetailActivity.setSnooze(true);
+					snooze.setBackgroundResource(R.drawable.snoozeoff);
+				}
+			}
+			
+		});
+		
+	call.setOnClickListener(new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {

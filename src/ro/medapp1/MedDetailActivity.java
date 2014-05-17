@@ -84,6 +84,14 @@ public class MedDetailActivity extends FragmentActivity {
 		}
 	}
 
+	public static boolean isSnooze() {
+		return isSnooze;
+	}
+
+	public static void setSnooze(boolean isSnooze) {
+		MedDetailActivity.isSnooze = isSnooze;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
