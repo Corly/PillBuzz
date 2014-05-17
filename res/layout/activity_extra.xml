@@ -24,18 +24,22 @@
         android:paddingBottom="30dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:paddingTop="30dp" >
+        android:paddingTop="30dp"
+        android:weightSum="10" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
             android:textColor="@color/darkblue"
-            android:textSize="@dimen/text_size" />
+            android:textSize="@dimen/text_size"
+            android:layout_weight="1" />
 
         <EditText
+            android:id="@+id/name_extra"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
         </EditText>
 
         <TextView
@@ -43,15 +47,18 @@
             android:layout_height="wrap_content"
             android:text="Dose"
             android:textColor="@color/darkblue"
-            android:textSize="@dimen/text_size" />
+            android:textSize="@dimen/text_size"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_weight="3"
             android:weightSum="7" >
 
             <NumberPicker
+                android:id="@+id/dose_extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2" />
@@ -74,27 +81,35 @@
             android:layout_height="wrap_content"
             android:text="Symptoms"
             android:textColor="@color/darkblue"
-            android:textSize="@dimen/text_size" />
+            android:textSize="@dimen/text_size"
+            android:layout_weight="1" />
 
         <EditText
+            android:id="@+id/symptoms_extra"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_weight="1" 
+           >
 
             <Button
+                android:id="@+id/save_extra"
+                android:background="@drawable/save"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Save" />
-
+              />
+            
             <Button
+                android:id="@+id/cancel_extra"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Cancel" />
         </LinearLayout>

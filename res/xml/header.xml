@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/upper_bar"
+    android:background="@drawable/upperbar"
     >
  
     <!-- title -->
@@ -19,7 +19,7 @@
          android:autoText="true"
            />
 
-    <!--  divider -->
+    <!--  divider 
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -27,6 +27,6 @@
             android:layout_alignParentBottom="true"
 
             ></View>
- 
+ -->
 </LinearLayout>
 

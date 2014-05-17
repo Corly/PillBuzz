@@ -26,6 +26,7 @@ public class MyAdapter extends ArrayAdapter<Model> {
 
 		this.context = context;
 		this.modelsArrayList = modelsArrayList;
+		
 	}
 
 	@Override

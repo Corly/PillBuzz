@@ -10,8 +10,7 @@ public class ExtraDb extends SQLiteOpenHelper {
 		private static final int DATABASE_VERSION = 1;
 		
 		public interface ExtraTable {
-			String TABLE_NAME = "extra";
-			
+			String TABLE_NAME = "extra";			
 			String COLUMN_NAME = "name";
 			String COLUMN_SYMPTOMS = "symptoms";
 			String COLUMN_DOSAGE = "dosage";
@@ -23,7 +22,7 @@ public class ExtraDb extends SQLiteOpenHelper {
 					COLUMN_SYMPTOMS + " text not null, " +
 					COLUMN_DOSAGE + " integer not null, " +
 					COLUMN_UNITS + " text not null, " +
-					COLUMN_DATE + " text not null, )";
+					COLUMN_DATE + " text not null )";
 		}
 				
 		public ExtraDb(Context context) {

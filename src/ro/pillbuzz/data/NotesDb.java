@@ -37,7 +37,7 @@ public class NotesDb extends SQLiteOpenHelper {
 			onCreate(db);
 		}
 		
-		public long addExtra(String title, String content,String date) {
+		public long addNote(String title, String content,String date) {
 			SQLiteDatabase db = this.getReadableDatabase();
 			
 			ContentValues values = new ContentValues();
