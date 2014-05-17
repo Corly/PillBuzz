@@ -10,10 +10,14 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_med_settings">MedSettings</string>
     <string name="title_activity_alarm">Alarm</string>
-    <string name="on">Turn On</string>
-    <string name="off">Turn Off</string>
-    <string name="Visible">Get Visible</string>
     <string name="List">List Devices</string>
+    <string name="send_data">Send Data</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="scanning">scanning for devices...</string>
 
     <string-array name="doze_entries">
         <item>pills</item>

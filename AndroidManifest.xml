@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:allowBackup="true"
@@ -55,11 +57,6 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_alarm" >
         </activity>
-
-        <receiver
-            android:name="ro.medapp1.Alarm"
-            android:process=":remote" />
-
         <activity
             android:name="ro.medapp1.ExtraActivity"
             android:label="@string/title_activity_extra" >
@@ -69,13 +66,14 @@
             android:label="@string/title_activity_notes" >
         </activity>
         <activity
-            android:name="ro.medapp1.ConnectBraceletActivity"
-            android:label="@string/title_activity_connect_bracelet" >
-        </activity>
-        <activity
             android:name="ro.medapp1.BraceletConnectActivity"
             android:label="@string/title_activity_bracelet_connect" >
         </activity>
+
+        <receiver
+            android:name="ro.medapp1.Alarm"
+            android:process=":remote" />
+        
     </application>
 
 </manifest>
