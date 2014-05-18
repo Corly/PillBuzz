@@ -88,6 +88,7 @@ public class MedVector {
 				Alarm.cancelIntent(context, med.getIntentID(), intent);
 				//alarmManager.cancel(m.getAlarmIntent());
 				list.remove(m);
+				break;
 			}
 		}
 	}
