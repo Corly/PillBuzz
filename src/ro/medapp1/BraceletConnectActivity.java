@@ -60,9 +60,9 @@ public class BraceletConnectActivity extends Activity {
         }
 
         // Unregister broadcast listeners
-        if (mReceiver != null) {
+        try {
         	this.unregisterReceiver(mReceiver);
-        }
+        } catch (Exception e) {}
     }
 	
 	private void setButtonListDevices() {
