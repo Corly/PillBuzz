@@ -1,5 +1,6 @@
 package ro.medapp1;
 
+import java.lang.reflect.Method;
 import java.util.Set;
 
 import android.app.Activity;
@@ -10,15 +11,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class BraceletConnectActivity extends Activity {
 	private BluetoothAdapter mBluetoothAdapter = null;
@@ -52,9 +54,15 @@ public class BraceletConnectActivity extends Activity {
         if (mBluetoothAdapter != null) {
             mBluetoothAdapter.cancelDiscovery();
         }
+        
+        if (mBluetoothService != null) {
+        	mBluetoothService.stop();
+        }
 
         // Unregister broadcast listeners
-        this.unregisterReceiver(mReceiver);
+        if (mReceiver != null) {
+        	this.unregisterReceiver(mReceiver);
+        }
     }
 	
 	private void setButtonListDevices() {
@@ -151,11 +159,52 @@ public class BraceletConnectActivity extends Activity {
             
             // Get the BluetoothDevice object
             BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+            
+            // TODO workaround
+            /*if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+            	unpairDevice(device);
+            }*/
+            //connectManual(device);
+            
+            //lists dissapear
+            findViewById(R.id.linear_view_blt_connect).setVisibility(View.GONE);
+            //TextView appears
+            findViewById(R.id.text_connected_info).setVisibility(View.VISIBLE);
             // Attempt to connect to the device
-            mBluetoothService.connect(device, true);
+            mBluetoothService.connect(device, false, (TextView)findViewById(R.id.text_connected_info));
+            
+            Button sendData = (Button) findViewById(R.id.button_send_data);
+            sendData.setVisibility(View.VISIBLE);
+            sendData.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					byte[] out = "Alarmaaa".getBytes();
+					mBluetoothService.write(out);
+					Toast.makeText(getApplicationContext(), mBluetoothService.getState() + "", Toast.LENGTH_SHORT).show();
+				}
+			});
         }
     };
 	
+    // Workaround.. 'til we find out what is the problem with connected devices
+    private void unpairDevice(BluetoothDevice device) {
+    	try {
+    		Method m = device.getClass().getMethod("removeBond", (Class[]) null);
+    		m.invoke(device, (Object[]) null);
+    	} catch (Exception e) {
+    		Log.e("Bluetooth", "Naspa");
+    	}
+    }
+    
+    private void connectManual(BluetoothDevice device) {
+    	try {
+    		Method m = device.getClass().getDeclaredMethod("connect", BluetoothDevice.class);
+    		m.invoke(device, (Object[])null);
+    	} catch (Exception e) {
+    		Log.e("Bluetooth", "Si mai naspa");
+    	}
+    }
 	
 	// The BroadcastReceiver that listens for discovered devices and
     // changes the title when discovery is finished

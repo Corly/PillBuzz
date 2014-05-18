@@ -59,14 +59,17 @@
         </activity>
         <activity
             android:name="ro.medapp1.ExtraActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_extra" >
         </activity>
         <activity
             android:name="ro.medapp1.NotesActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_notes" >
         </activity>
         <activity
             android:name="ro.medapp1.BraceletConnectActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_bracelet_connect" >
         </activity>
 
