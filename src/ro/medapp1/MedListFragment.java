@@ -126,14 +126,14 @@ public class MedListFragment extends ListFragment {
 		year=today.getYear()+1900;
 		if(day<10)
 			if(month<10)
-				models.add(new Model("0"+today.getDate() + "/0" + (today.getMonth()+1) + "/"+ (today.getYear()+1900)));
+				models.add(new Model("0"+today.getDate() + ".0" + (today.getMonth()+1) + "."+ (today.getYear()+1900)));
 			else 
-				models.add(new Model("0"+today.getDate() + "/" + (today.getMonth()+1) + "/"+ (today.getYear()+1900)));
+				models.add(new Model("0"+today.getDate() + "." + (today.getMonth()+1) + "."+ (today.getYear()+1900)));
 		else 
 			if(month<10)
-				models.add(new Model(today.getDate() + "/0" + (today.getMonth()+1) + "/"+ (today.getYear()+1900)));
+				models.add(new Model(today.getDate() + ".0" + (today.getMonth()+1) + "."+ (today.getYear()+1900)));
 			else
-				models.add(new Model(today.getDate() + "/" + (today.getMonth()+1) + "/"+ (today.getYear()+1900)));
+				models.add(new Model(today.getDate() + "." + (today.getMonth()+1) + "."+ (today.getYear()+1900)));
 		System.out.println("add");
 		for (Med med : MedVector.getInstance().getList()) {
 			System.out.println("for each");

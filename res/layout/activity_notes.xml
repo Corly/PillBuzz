@@ -46,7 +46,6 @@
             android:textColor="@color/darkblue"
             android:textSize="@dimen/text_size" />
 
-
         <EditText
             android:id="@+id/note_notes"
             android:layout_width="match_parent"
@@ -61,16 +60,16 @@
             <Button
                 android:id="@+id/save_note"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:background="@drawable/save" />
 
             <Button
                 android:id="@+id/cancel_note"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Cancel" />
+                android:background="@drawable/cancel" />
         </LinearLayout>
     </LinearLayout>
 

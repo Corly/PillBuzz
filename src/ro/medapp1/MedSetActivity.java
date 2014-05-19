@@ -165,6 +165,14 @@ public class MedSetActivity extends PreferenceActivity {
 				setButton();
 			}
 		});
+		Button cancel = (Button) findViewById(R.id.button_cancel_med);
+		cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 	
 

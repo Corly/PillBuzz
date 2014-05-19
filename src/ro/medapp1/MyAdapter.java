@@ -23,7 +23,6 @@ public class MyAdapter extends ArrayAdapter<Model> {
 	public MyAdapter(Context context, ArrayList<Model> modelsArrayList) {
 
 		super(context, R.xml.target_item, modelsArrayList);
-
 		this.context = context;
 		this.modelsArrayList = modelsArrayList;
 		
