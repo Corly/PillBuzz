@@ -47,21 +47,23 @@ public class BluetoothService {
 
     private synchronized void setState(int state) {
         mState = state;
-        ((Activity)context).runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (mState == 0) {
-					textViewState.setText("NONE");
-				} else if (mState == 1) {
-					textViewState.setText("LISTEN");
-				} else if (mState == 2) {
-					textViewState.setText("CONNECTING");
-				} else {
-					textViewState.setText("CONNECTED");
-				}
-			}
-		});
+        if (context != null && textViewState != null) {
+        	((Activity)context).runOnUiThread(new Runnable() {
+
+        		@Override
+        		public void run() {
+        			if (mState == 0) {
+        				textViewState.setText("NONE");
+        			} else if (mState == 1) {
+        				textViewState.setText("LISTEN");
+        			} else if (mState == 2) {
+        				textViewState.setText("CONNECTING");
+        			} else {
+        				textViewState.setText("CONNECTED");
+        			}
+        		}
+        	});
+        }
     }
     
     /**

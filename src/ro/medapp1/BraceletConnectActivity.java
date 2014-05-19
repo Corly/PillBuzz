@@ -179,7 +179,7 @@ public class BraceletConnectActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					byte[] out = "Alarmaaa".getBytes();
+					byte[] out = "<<< Alarma >>>".getBytes();
 					mBluetoothService.write(out);
 					Toast.makeText(getApplicationContext(), "Data sent!", Toast.LENGTH_SHORT).show();
 				}
